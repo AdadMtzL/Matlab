@@ -22,7 +22,9 @@ c4 = [34 28 44 37 50; 186 165 135 92 171];
 c5 = [134 128 160 137 100; -37 -16 -36 -63 -22];
 c6 = [-110 -17 -54 -107 -50;47 96 56 93 22];
 %vector no clasificado
-vector=[7; 5];
+vectorx=input('Indique la coordenada x del vector no clasificado ');
+vectory=input('Indique la coordenada y del vector no clasificado ');
+vector=[vectorx;vectory];
 
 %calculo de medias
 media1 = mean(c1,2);
@@ -96,7 +98,7 @@ matinvb6=inv(b6);
 distancia6=transdifvecmed6*matinvb6*difvecmed6; % ya da la distancia corecta
 
 %deteminación de la menor distancia
-distancias=[distancia1 distancia2 distancia3];
+distancias=[distancia1 distancia2 distancia3 distancia4 distancia5 distancia6];
 
 dist_min=min(min(distancias));
 
