@@ -10,7 +10,7 @@ warning off all
 %                                  a2                              b                                 a1
 
 
-%                          matriz_covarianza_clase=(x-media_clase)*(x-media_clase)^T
+%                          matriz_covarianza_clase=(clase-media_clase)*(clase-media_clase)^T
 
 %notas importantes : ^T indica la matriz transpuesta
 
