@@ -61,8 +61,10 @@ inf2=(2*pi)^(2/2)*det(inv(matriz_var_cov_clase_2))^(1/2);
 inf3=(2*pi)^(2/2)*det(inv(matriz_var_cov_clase_3))^(1/2);
 
 %calculo de las probabilidades
-probabilidad_1=sup1/inf1
-probabilidad_2=sup2/inf2
-probabilidad_3=sup3/inf3
+probabilidad_1=sup1/inf1;
+probabilidad_2=sup2/inf2;
+probabilidad_3=sup3/inf3;
 
-
+probabilidad_total_1=(probabilidad_1/probabilidad_2+probabilidad_3)*100;
+probabilidad_total_2=(probabilidad_2/probabilidad_1+probabilidad_3)*100;
+probabilidad_total_3=(probabilidad_3/probabilidad_2+probabilidad_1)*100;
