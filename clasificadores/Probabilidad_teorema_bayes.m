@@ -56,9 +56,9 @@ sup2=exp(-(dist2)/2);
 sup3=exp(-(dist3)/2);
 
 %calculo de la parte inferior de la fracción
-inf1=(2*pi)^(1/2)*det(inv(matriz_var_cov_clase_1))^(1/2);
-inf2=(2*pi)^(1/2)*det(inv(matriz_var_cov_clase_2))^(1/2);
-inf3=(2*pi)^(1/2)*det(inv(matriz_var_cov_clase_3))^(1/2);
+inf1=(2*pi)^(2/2)*det(inv(matriz_var_cov_clase_1))^(1/2);
+inf2=(2*pi)^(2/2)*det(inv(matriz_var_cov_clase_2))^(1/2);
+inf3=(2*pi)^(2/2)*det(inv(matriz_var_cov_clase_3))^(1/2);
 
 %calculo de las probabilidades
 probabilidad_1=sup1/inf1
