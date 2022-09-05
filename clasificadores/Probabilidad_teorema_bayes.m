@@ -31,9 +31,9 @@ media2=mean(c2,2);
 media3=mean(c3,2);
 
 %calculo de las matrices de varianza_covarianza
-matriz_var_cov_clase_1=(c1-media1);
-matriz_var_cov_clase_2=(c2-media2);
-matriz_var_cov_clase_3=(c3-media3);
+matriz_var_cov_clase_1=(c1-media1)*transpose(c1-media1);
+matriz_var_cov_clase_2=(c2-media2)*transpose(c2-media2);
+matriz_var_cov_clase_3=(c3-media3)*transpose(c3-media3);
 
 %calculo de la mat1
 mat1_1=vector-media1;
@@ -42,6 +42,27 @@ mat1_3=vector-media3;
 
 %calculo de la mat2
 mat2_1=transpose(mat1_1);
-mat2_2=transpose(mat2_1);
-mat2_3=transpose(mat3_1);
+mat2_2=transpose(mat1_2);
+mat2_3=transpose(mat1_3);
+
+%calculo de distancias de mahalobis
+dist1=mat2_1*inv(matriz_var_cov_clase_1)*mat1_1;
+dist2=mat2_2*inv(matriz_var_cov_clase_2)*mat1_2;
+dist3=mat2_3*inv(matriz_var_cov_clase_3)*mat1_3;
+
+%calculo de la parte superior de la fracción
+sup1=exp(-(dist1)/2);
+sup2=exp(-(dist2)/2);
+sup3=exp(-(dist3)/2);
+
+%calculo de la parte inferior de la fracción
+inf1=(2*pi)^(1/2)*det(inv(matriz_var_cov_clase_1))^(1/2);
+inf2=(2*pi)^(1/2)*det(inv(matriz_var_cov_clase_2))^(1/2);
+inf3=(2*pi)^(1/2)*det(inv(matriz_var_cov_clase_3))^(1/2);
+
+%calculo de las probabilidades
+probabilidad_1=sup1/inf1
+probabilidad_2=sup2/inf2
+probabilidad_3=sup3/inf3
+
 
