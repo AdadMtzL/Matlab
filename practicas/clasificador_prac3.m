@@ -23,7 +23,7 @@ colores = ['r' 'g' 'b' 'c' 'm' 'y' 'k'];
 nc=1;
 
 %generación de las clases aleatorias y su ploteo
-for indice=1:1:
+for indice=1:1:m
     fprintf("clase %d\n",indice);
     cenx=input('Indique la coordenada x del centroide de la clase \n');
     ceny=input('Indique la coordenada x del centroide de la clase \n');
