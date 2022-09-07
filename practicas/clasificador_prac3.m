@@ -27,8 +27,8 @@ for indice=1:1:m
     fprintf("clase %d\n",indice);
     cenx=input('Indique la coordenada x del centroide de la clase \n');
     ceny=input('Indique la coordenada x del centroide de la clase \n');
-    vx=randn(1,cn)+indice/2;
-    vy=randn(1,cn)+indice/2;
+    vx=randn(1,cn)+cenx;
+    vy=randn(1,cn)+ceny;
 
     %sección que plotea de manera diferente cada clase, genera 50 etiquetas
     %El limite de clases es 120 para que no genere un fallo al plotear
