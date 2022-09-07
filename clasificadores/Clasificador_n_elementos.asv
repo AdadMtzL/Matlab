@@ -27,12 +27,12 @@ m=input('Indique la cantidad de clases \n');
 cn=input('Indique la cantidad de elementos por clase \n');
 
 for indice=1:1:m
-    disp('clase');
-    disp(indice);
-    cenx=input('Indique la coordenada x del centroide de la clase \n');
-    ceny=input('Indique la coordenada x del centroide de la clase \n');
-    vx=randn(1,cn)+indice/2;
-    vy=randn(1,cn)+indice/2;
+    %disp('clase');
+    %disp(indice);
+    %cenx=input('Indique la coordenada x del centroide de la clase \n');
+    %ceny=input('Indique la coordenada x del centroide de la clase \n');
+    vx=randn(1,cn);
+    vy=randn(1,cn);
     if(indice == 1)
         plot(vx(1,:),vy(1,:),'go','MarkerFaceColor','g','MarkerSize',5);
         hold on
@@ -84,17 +84,17 @@ for indice=1:1:m
     elseif(indice == 24)
         plot(vx(1,:),vy(1,:),'rd','MarkerFaceColor','r','MarkerSize',5);
     elseif(indice == 25)
-        plot(vx(1,:),vy(1,:),'r^','MarkerFaceColor','r','MarkerSize',5);
+        plot(vx(1,:),vy(1,:),'r^','MarkerFaceColor','br','MarkerSize',5);
     elseif(indice == 26)
-        plot(vx(1,:),vy(1,:),'rv','MarkerFaceColor','r','MarkerSize',5);
+        plot(vx(1,:),vy(1,:),'rv','MarkerFaceColor','b','MarkerSize',5);
     elseif(indice == 27)
-        plot(vx(1,:),vy(1,:),'r<','MarkerFaceColor','r','MarkerSize',5);
+        plot(vx(1,:),vy(1,:),'r<','MarkerFaceColor','b','MarkerSize',5);
     elseif(indice == 28)
-        plot(vx(1,:),vy(1,:),'r>','MarkerFaceColor','r','MarkerSize',5);
+        plot(vx(1,:),vy(1,:),'r>','MarkerFaceColor','b','MarkerSize',5);
     elseif(indice == 29)
-        plot(vx(1,:),vy(1,:),'rp','MarkerFaceColor','r','MarkerSize',5);
+        plot(vx(1,:),vy(1,:),'rp','MarkerFaceColor','b','MarkerSize',5);
     elseif(indice == 30)
-        plot(vx(1,:),vy(1,:),'rh','MarkerFaceColor','r','MarkerSize',5); 
+        plot(vx(1,:),vy(1,:),'rh','MarkerFaceColor','b','MarkerSize',5); 
     elseif(indice == 31)
         plot(vx(1,:),vy(1,:),'bo','MarkerFaceColor','b','MarkerSize',5);
     elseif(indice == 32)
