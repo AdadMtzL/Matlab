@@ -6,99 +6,40 @@ warning off all
 m=input('Indique la cantidad de clases \n');
 cn=input('Indique la cantidad de elementos por clase \n');
 
+%obtención del ector desconocido
+desconocido_x=input('Indique la coordenada x del vector desconocido\n');
+desconocido_y=input('Indique la coordenada y del vector desconocido\n');
+vector=[desconocido_x ; desconocido_y];
+
+%ploteo del vector desconocido
+plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
+hold on
+grid on
+ 
+%variables auxiliares para el ploteo
+figuras = ['o' '+' '*' '.' 'x' '_' '|' 's' 'd' '^' 'v' '<' '>' 'p' 'h'];
+nf=1;
+colores = ['r' 'g' 'b' 'c' 'm' 'y' 'k'];
+nc=1;
+
+%generación de las clases aleatorias y su ploteo
 for indice=1:1:m
-    disp('clase');
-    disp(indice);
-    %cenx=input('Indique la coordenada x del centroide de la clase \n');
-    %ceny=input('Indique la coordenada x del centroide de la clase \n');
+    fprintf("clase %d\n",indice);
+    cenx=input('Indique la coordenada x del centroide de la clase \n');
+    ceny=input('Indique la coordenada x del centroide de la clase \n');
     vx=randn(1,cn)+indice/2;
     vy=randn(1,cn)+indice/2;
-    if(indice == 1)
-        plot(vx(1,:),vy(1,:),'ro','MarkerFaceColor','r','MarkerSize',5);
-        hold on
-        grid on
-    elseif(indice == 2)
-        plot(vx(1,:),vy(1,:),'go','MarkerFaceColor','g','MarkerSize',5);
-    elseif(indice == 3)
-        plot(vx(1,:),vy(1,:),'bo','MarkerFaceColor','b','MarkerSize',5);
-    elseif(indice == 4)
-        plot(vx(1,:),vy(1,:),'co','MarkerFaceColor','c','MarkerSize',5);
-    elseif(indice == 5)
-        plot(vx(1,:),vy(1,:),'mo','MarkerFaceColor','m','MarkerSize',5);
-    elseif(indice == 6)
-        plot(vx(1,:),vy(1,:),'yo','MarkerFaceColor','y','MarkerSize',5);
-    elseif(indice == 7)
-        plot(vx(1,:),vy(1,:),'ko','MarkerFaceColor','k','MarkerSize',5);
-    elseif(indice == 8)
-        plot(vx(1,:),vy(1,:),'r+','MarkerFaceColor','r','MarkerSize',5);
-    elseif(indice == 9)
-        plot(vx(1,:),vy(1,:),'g+','MarkerFaceColor','g','MarkerSize',5);
-    elseif(indice == 10)
-        plot(vx(1,:),vy(1,:),'b+','MarkerFaceColor','b','MarkerSize',5);
-    elseif(indice == 11)
-        plot(vx(1,:),vy(1,:),'c+','MarkerFaceColor','c','MarkerSize',5);
-    elseif(indice == 12)
-        plot(vx(1,:),vy(1,:),'m+','MarkerFaceColor','m','MarkerSize',5);
-    elseif(indice == 13)
-        plot(vx(1,:),vy(1,:),'y+','MarkerFaceColor','y','MarkerSize',5);
-    elseif(indice == 14)
-        plot(vx(1,:),vy(1,:),'k+','MarkerFaceColor','k','MarkerSize',5);        
-    elseif(indice == 15)
-        plot(vx(1,:),vy(1,:),'r*','MarkerFaceColor','r','MarkerSize',5);
-    elseif(indice == 16)
-        plot(vx(1,:),vy(1,:),'g*','MarkerFaceColor','g','MarkerSize',5);
-    elseif(indice == 17)
-        plot(vx(1,:),vy(1,:),'b*','MarkerFaceColor','b','MarkerSize',5);
-    elseif(indice == 18)
-        plot(vx(1,:),vy(1,:),'c*','MarkerFaceColor','c','MarkerSize',5);
-    elseif(indice == 19)
-        plot(vx(1,:),vy(1,:),'m*','MarkerFaceColor','m','MarkerSize',5);
-    elseif(indice == 20)
-        plot(vx(1,:),vy(1,:),'y*','MarkerFaceColor','y','MarkerSize',5);
-    elseif(indice == 21)
-        plot(vx(1,:),vy(1,:),'k*','MarkerFaceColor','k','MarkerSize',5);
-    elseif(indice == 22)
-        plot(vx(1,:),vy(1,:),'r.','MarkerFaceColor','r','MarkerSize',5);
-    elseif(indice == 23)
-        plot(vx(1,:),vy(1,:),'g.','MarkerFaceColor','g','MarkerSize',5);
-    elseif(indice == 24)
-        plot(vx(1,:),vy(1,:),'b.','MarkerFaceColor','b','MarkerSize',5);
-    elseif(indice == 25)
-        plot(vx(1,:),vy(1,:),'c.','MarkerFaceColor','c','MarkerSize',5);
-    elseif(indice == 26)
-        plot(vx(1,:),vy(1,:),'m.','MarkerFaceColor','m','MarkerSize',5);
-    elseif(indice == 28)
-        plot(vx(1,:),vy(1,:),'y.','MarkerFaceColor','y','MarkerSize',5);
-    elseif(indice == 29)
-        plot(vx(1,:),vy(1,:),'k.','MarkerFaceColor','k','MarkerSize',5);        
-    elseif(indice == 30)
-        plot(vx(1,:),vy(1,:),'rx','MarkerFaceColor','r','MarkerSize',5);
-    elseif(indice == 31)
-        plot(vx(1,:),vy(1,:),'gx','MarkerFaceColor','g','MarkerSize',5);
-    elseif(indice == 32)
-        plot(vx(1,:),vy(1,:),'bx','MarkerFaceColor','b','MarkerSize',5);
-    elseif(indice == 33)
-        plot(vx(1,:),vy(1,:),'cx','MarkerFaceColor','c','MarkerSize',5);
-    elseif(indice == 34)
-        plot(vx(1,:),vy(1,:),'mx','MarkerFaceColor','m','MarkerSize',5);
-    elseif(indice == 35)
-        plot(vx(1,:),vy(1,:),'yx','MarkerFaceColor','y','MarkerSize',5);
-    elseif(indice == 36)
-        plot(vx(1,:),vy(1,:),'kx','MarkerFaceColor','k','MarkerSize',5);     
-    elseif(indice == 15)
-        plot(vx(1,:),vy(1,:),'r_','MarkerFaceColor','r','MarkerSize',5);
-    elseif(indice == 16)
-        plot(vx(1,:),vy(1,:),'g_','MarkerFaceColor','g','MarkerSize',5);
-    elseif(indice == 17)
-        plot(vx(1,:),vy(1,:),'b_','MarkerFaceColor','b','MarkerSize',5);
-    elseif(indice == 18)
-        plot(vx(1,:),vy(1,:),'c_','MarkerFaceColor','c','MarkerSize',5);
-    elseif(indice == 19)
-        plot(vx(1,:),vy(1,:),'m_','MarkerFaceColor','m','MarkerSize',5);
-    elseif(indice == 20)
-        plot(vx(1,:),vy(1,:),'y_','MarkerFaceColor','y','MarkerSize',5);
-    elseif(indice == 21)
-        plot(vx(1,:),vy(1,:),'k','MarkerFaceColor','k','MarkerSize',5);        
+
+    %sección que plotea de manera diferente cada clase, genera 50 etiquetas
+    %El limite de clases es 120 para que no genere un fallo al plotear
+    if(nc>7)
+        nc=1;
+        nf=nf+1;
+    else
+        figs=[colores(nc) figuras(nf)];
+        cl=[colores(nc)];
+        plot(vx(1,:),vy(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+        nc=nc+1;
     end
 end
 
