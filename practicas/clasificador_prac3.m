@@ -3,8 +3,8 @@ clear all
 close all
 warning off all
 %intento de generar m clases con n elementos
-m=input('Indique la cantidad de clases \n');
-cn=input('Indique la cantidad de elementos por clase \n');
+no_clases=input('Indique la cantidad de clases \n');
+elementos_clase=input('Indique la cantidad de elementos por clase \n');
 
 %obtención del ector desconocido
 desconocido_x=input('Indique la coordenada x del vector desconocido\n');
@@ -22,13 +22,51 @@ nf=1;
 colores = ['r' 'g' 'b' 'c' 'm' 'y' 'k'];
 nc=1;
 
+%Determinación de la distancia por el usuario
+while (tipo_distancia >2 || tipo_distancia <1)
+    tipo_distancia=input('Indique la distancia a calcular, 1.-Euclidiana, 2.-Mahalobis \n');
+end
+
 %generación de las clases aleatorias y su ploteo
-for indice=1:1:m
+for indice=1:1:no_clases
     fprintf("clase %d\n",indice);
     cenx=input('Indique la coordenada x del centroide de la clase \n');
     ceny=input('Indique la coordenada x del centroide de la clase \n');
-    vx=randn(1,cn)+cenx;
-    vy=randn(1,cn)+ceny;
+    clase_x=randn(1,elementos_clase)+cenx;
+    clase_y=randn(1,elementos_clase)+ceny;
+    clase=[clase_x;clase_y];
+    %Calculo de distancias
+    if(tipo_distancia == 1)
+        %distancia euclidiana
+        media=mean(clase,2);
+        distancia_calculada=norm(vector-media);
+        %Almacenamiento de la distancia minima y clase
+        if(indice==1)
+            distancia_minima=distancia_calculada;
+            clase=indice;
+        else
+            if(distancia_calculada<distancia_minima)
+                distancia_minima=distancia_calculada;
+                clase=indice;
+            end
+        end
+    else
+        %distancia mahalobis
+        media=mean(clase,2);
+        matriz_covarianza=(clase-media)*transpose((clase-media));
+        matriz_covarianza_inversa=inv(matriz_covarianza);
+        distancia_calculada_mahalobis=transpose(vector-media)*matriz_covarianza_inversa*(vector-media);
+        %Almacenamiento de la distancia minima y clase
+        if(indice==1)
+            distancia_minima=distancia_calculada_mahalobis;
+            clase=indice;
+        else
+            if(distancia_calculada<distancia_minima)
+                distancia_minima=distancia_calculada_mahalobis;
+                clase=indice;
+            end
+        end
+    end
 
     %sección que plotea de manera diferente cada clase, genera 50 etiquetas
     %El limite de clases es 120 para que no genere un fallo al plotear
@@ -38,13 +76,14 @@ for indice=1:1:m
     else
         figs=[colores(nc) figuras(nf)];
         cl=[colores(nc)];
-        plot(vx(1,:),vy(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+        plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
         nombre="clase "+indice;
         nombre=nombre+ nombre;
         legend('vector desconocido',nombre);
         nc=nc+1;
     end
 end
+fprintf("El vector pertenece a la clase %d\n",clase);
 
 %Practica 3: Pedir al usuario generar n clases con n representantes por clase %
 %pedir la ubicación del vector desconocido.
