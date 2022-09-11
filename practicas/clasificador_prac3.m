@@ -44,11 +44,11 @@ for indice=1:1:no_clases
         %Almacenamiento de la distancia minima y clase
         if(indice==1)
             distancia_minima=distancia_calculada;
-            clase=indice;
+            clase_pert=indice;
         else
             if(distancia_calculada<distancia_minima)
                 distancia_minima=distancia_calculada;
-                clase=indice;
+                clase_pert=indice;
             end
         end
     else
@@ -58,15 +58,15 @@ for indice=1:1:no_clases
         matriz_covarianza_inversa=inv(matriz_covarianza);
         diferenia_vector_clase=vector-media;
         diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
-        distancia_calculada_mahalobis=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase
+        distancia_calculada_mahalobis=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
         %Almacenamiento de la distancia minima y clase
         if(indice==1)
             distancia_minima=distancia_calculada_mahalobis;
-            clase=indice;
+            clase_pert=indice;
         else
             if(distancia_calculada_mahalobis<distancia_minima)
                 distancia_minima=distancia_calculada_mahalobis;
-                clase=indice;
+                clase_pert=indice;
             end
         end
     end
@@ -86,7 +86,7 @@ for indice=1:1:no_clases
         nc=nc+1;
     end
 end
-%fprintf("El vector pertenece a la clase %d\n",clase);
+%fprintf("El vector pertenece a la clase %d\n",clase_pert);
 
 %Practica 3: Pedir al usuario generar n clases con n representantes por clase %
 %pedir la ubicación del vector desconocido.
