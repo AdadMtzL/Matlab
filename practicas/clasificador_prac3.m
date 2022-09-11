@@ -32,7 +32,7 @@ end
 for indice=1:1:no_clases
     fprintf("clase %d\n",indice);
     cenx=input('Indique la coordenada x del centroide de la clase \n');
-    ceny=input('Indique la coordenada x del centroide de la clase \n');
+    ceny=input('Indique la coordenada y del centroide de la clase \n');
     clase_x=randn(1,elementos_clase)+cenx;
     clase_y=randn(1,elementos_clase)+ceny;
     clase=[clase_x;clase_y];
@@ -86,7 +86,7 @@ for indice=1:1:no_clases
         nc=nc+1;
     end
 end
-%fprintf("El vector pertenece a la clase %d\n",clase_pert);
+fprintf("El vector pertenece a la clase %d\n",clase_pert);
 
 %Practica 3: Pedir al usuario generar n clases con n representantes por clase %
 %pedir la ubicación del vector desconocido.
