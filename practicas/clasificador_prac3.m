@@ -23,6 +23,7 @@ colores = ['r' 'g' 'b' 'c' 'm' 'y' 'k'];
 nc=1;
 
 %Determinación de la distancia por el usuario
+tipo_distancia=0;
 while (tipo_distancia >2 || tipo_distancia <1)
     tipo_distancia=input('Indique la distancia a calcular, 1.-Euclidiana, 2.-Mahalobis \n');
 end
@@ -55,13 +56,15 @@ for indice=1:1:no_clases
         media=mean(clase,2);
         matriz_covarianza=(clase-media)*transpose((clase-media));
         matriz_covarianza_inversa=inv(matriz_covarianza);
-        distancia_calculada_mahalobis=transpose(vector-media)*matriz_covarianza_inversa*(vector-media);
+        diferenia_vector_clase=vector-media;
+        diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
+        distancia_calculada_mahalobis=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase
         %Almacenamiento de la distancia minima y clase
         if(indice==1)
             distancia_minima=distancia_calculada_mahalobis;
             clase=indice;
         else
-            if(distancia_calculada<distancia_minima)
+            if(distancia_calculada_mahalobis<distancia_minima)
                 distancia_minima=distancia_calculada_mahalobis;
                 clase=indice;
             end
@@ -83,7 +86,7 @@ for indice=1:1:no_clases
         nc=nc+1;
     end
 end
-fprintf("El vector pertenece a la clase %d\n",clase);
+%fprintf("El vector pertenece a la clase %d\n",clase);
 
 %Practica 3: Pedir al usuario generar n clases con n representantes por clase %
 %pedir la ubicación del vector desconocido.
