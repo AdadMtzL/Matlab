@@ -12,6 +12,7 @@ desconocido_y=input('Indique la coordenada y del vector desconocido\n');
 vector=[desconocido_x ; desconocido_y];
 
 %ploteo del vector desconocido
+etiquetas_grupo=["vector-desconocido "];
 plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
 hold on
 grid on
@@ -80,9 +81,10 @@ for indice=1:1:no_clases
         figs=[colores(nc) figuras(nf)];
         cl=[colores(nc)];
         plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-        nombre="clase "+indice;
-        nombre=nombre+ nombre;
-        legend('vector desconocido',nombre);
+        nombre=string(" clase-"+indice);
+        etiquetas_grupo=etiquetas_grupo.append(nombre);
+        etiquetas_ind=split(etiquetas_grupo);
+        legend(etiquetas_ind);
         nc=nc+1;
     end
 end
