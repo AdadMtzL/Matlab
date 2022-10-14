@@ -38,6 +38,7 @@ while(respuesta~=0)
 
     %generación de las clases aleatorias y su ploteo
     for indice=1:1:no_clases
+        fprintf('________________________________________________________\n');
         fprintf("clase %d\n",indice);
         %obtención del centroide
         cenx=input('Indique la coordenada x del centroide de la clase \n');
@@ -89,6 +90,11 @@ while(respuesta~=0)
         if(nc>7)
             nc=1;
             nf=nf+1;
+            figs=[colores(nc) figuras(nf)];
+            plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+            nombre=string(" clase-"+indice);
+            etiquetas_grupo=etiquetas_grupo.append(nombre);
+            nc=nc+1;
         else
             figs=[colores(nc) figuras(nf)];
             cl=[colores(nc)];
