@@ -2,18 +2,18 @@ clc
 clear all
 close all
 warning off all
-%intento de generar m clases con n elementos
+%generador de m clases con n elementos
 no_clases=input('Indique la cantidad de clases \n');
 elementos_clase=input('Indique la cantidad de elementos por clase \n');
 
-%obtención del ector desconocido
+%obtención del vector desconocido
 desconocido_x=input('Indique la coordenada x del vector desconocido\n');
 desconocido_y=input('Indique la coordenada y del vector desconocido\n');
 vector=[desconocido_x ; desconocido_y];
 
 %ploteo del vector desconocido
+etiquetas_grupo=["vector-desconocido "];
 plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
-etiquetas=["vector_desconocido"];
 hold on
 grid on
  
@@ -32,14 +32,13 @@ end
 %generación de las clases aleatorias y su ploteo
 for indice=1:1:no_clases
     fprintf("clase %d\n",indice);
+    
     cenx=input('Indique la coordenada x del centroide de la clase \n');
     ceny=input('Indique la coordenada y del centroide de la clase \n');
+    %generación de las clases
     clase_x=randn(1,elementos_clase)+cenx;
     clase_y=randn(1,elementos_clase)+ceny;
     clase=[clase_x;clase_y];
-    nombre=string("clase_"+indice);
-    etiquetas.append(nombre)
-
     %Calculo de distancias
     if(tipo_distancia == 1)
         %distancia euclidiana
@@ -84,9 +83,10 @@ for indice=1:1:no_clases
         figs=[colores(nc) figuras(nf)];
         cl=[colores(nc)];
         plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-        nombre="clase "+indice;
-        nombre=nombre+ nombre;
-        legend('vector desconocido',nombre);
+        nombre=string(" clase-"+indice);
+        etiquetas_grupo=etiquetas_grupo.append(nombre);
+        etiquetas_ind=split(etiquetas_grupo);
+        legend(etiquetas_ind);
         nc=nc+1;
     end
 end

@@ -2,11 +2,11 @@ clc
 clear all
 close all
 warning off all
-%intento de generar m clases con n elementos
+%generador de m clases con n elementos
 no_clases=input('Indique la cantidad de clases \n');
 elementos_clase=input('Indique la cantidad de elementos por clase \n');
 
-%obtención del ector desconocido
+%obtención del vector desconocido
 desconocido_x=input('Indique la coordenada x del vector desconocido\n');
 desconocido_y=input('Indique la coordenada y del vector desconocido\n');
 vector=[desconocido_x ; desconocido_y];
@@ -32,10 +32,15 @@ end
 %generación de las clases aleatorias y su ploteo
 for indice=1:1:no_clases
     fprintf("clase %d\n",indice);
+    %obtención del centroide
     cenx=input('Indique la coordenada x del centroide de la clase \n');
     ceny=input('Indique la coordenada y del centroide de la clase \n');
-    clase_x=randn(1,elementos_clase)+cenx;
-    clase_y=randn(1,elementos_clase)+ceny;
+    %obtención de las dispersion de la clase
+    disp_x=input('Indique la dispersion en el eje x \n');
+    disp_y=input('Indique la dispersion en el eje y \n');
+    %generación de las clases
+    clase_x=(randn(1,elementos_clase)+cenx)*disp_x;
+    clase_y=(randn(1,elementos_clase)+ceny)*disp_y;
     clase=[clase_x;clase_y];
     %Calculo de distancias
     if(tipo_distancia == 1)
@@ -72,7 +77,7 @@ for indice=1:1:no_clases
         end
     end
 
-    %sección que plotea de manera diferente cada clase, genera 50 etiquetas
+    %sección que plotea de manera diferente cada clase
     %El limite de clases es 120 para que no genere un fallo al plotear
     if(nc>7)
         nc=1;
