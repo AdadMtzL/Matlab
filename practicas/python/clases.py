@@ -142,7 +142,7 @@ def menu():
     print("Bienvenido al menu, las opciones a elegir son las siguientes: \n")
     print("0 - salir\n 1 - Definir el vector desconocido \n 2 - definir las clases \n 3 - ver todas las clases \n")
     print("4 - ver una clase en especifico\n 5 - distancia euclidiana \n 6 - distancia mahalahobis \n 7 - maxima probabilidad \n")
-    opc = input("Indique a opcion a realizar \t")
+    opc = int(input("Indique a opcion a realizar \t"))
     while (opc != 0):
         if(opc == 1):
             vector = declarar_vector()
