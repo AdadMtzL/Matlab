@@ -82,20 +82,6 @@ def declarar_vector():
     return vector
 
 '''
-Función encargada de dar inicio a la generación de clases y obtención del vector desconocido
-
-prarametros none
-
-return none
-'''
-def iniciar():
-    vector=declarar_vector()
-    cant_clases=int(input("inidique la cantidad de clases a generar \n"))
-    cls = crear_clases(cant_clases)
-    ver_instancias()
-    print("vector a clasfificar: ",vector)
-
-'''
 Función encargada de obtener la distancia euclidiana
 
 parametros list, list
@@ -128,12 +114,64 @@ parametros list, list
 
 return list
 '''
-def euclidiana():
+def max_prob():
     probs = []
+    #e = np.exp()
+
+'''
+FUnción que permite ver una clase en especifico
+
+parametros int
+
+return none
+'''
+def ver_clase(no_clase):
+    print("------------------------------------------")
+    print("clase ",no_clase+1)
+    print("cantidad de elementos: ",creadas[no_clase].cant)
+    print("disperson eje x: ",creadas[no_clase].dispx)
+    print("dispersion eje y: ",creadas[no_clase].dispy)
+    print("centroide eje x: ",creadas[no_clase].cenx)
+    print("centroide eje y: ",creadas[no_clase].ceny)
+    print("vectores en x: ",creadas[no_clase].vecx)
+    print("vectores en y: ",creadas[no_clase].vecy)
+    print("------------------------------------------")
+
+def menu():
+    print("Bienvenido al menu, las opciones a elegir son las siguientes: \n")
+    print("0 - salir\n 1 - Definir el vector desconocido \n 2 - definir las clases \n 3 - ver todas las clases \n")
+    print("4 - ver una clase en especifico\n 5 - distancia euclidiana \n 6 - distancia mahalahobis \n 7 - maxima probabilidad \n")
+    opc = input("Indique a opcion a realizar \t")
+    while (opc != 0):
+        if(opc == 1):
+            vector = declarar_vector()
+            menu()
+        elif( opc == 2):
+            cant_clases=int(input("inidique la cantidad de clases a generar \n"))
+            cls = crear_clases(cant_clases)
+            menu()
+        elif( opc == 3):
+            ver_instancias()
+            menu()
+        elif( opc == 4):
+            no_clase = input("Indique la clase a ver")
+            ver_clase(no_clase) 
+            menu()           
+        elif( opc == 5):
+            euclidiana()
+            menu()
+        elif( opc == 6):
+            mahalahobis()
+            menu()                        
+        elif( opc == 7):
+            max_prob()
+            menu()
+        elif(opc<0 or opc >7):
+            menu()
 
 '''
 Segmento de código necesario para iniciaizar el programa
 '''
 if __name__ != '__clases__':
     print("iniciando programa")
-    iniciar()
+    menu()
