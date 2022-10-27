@@ -36,7 +36,7 @@ return list
 def crear_clases(cantidad_clases):
     cantidad_elem=int(input("indique la cantidad de elementos por clase \n"))
     for i in range(0,cantidad_clases):
-        np.random.seed(rd.random()*(rd.random())*35+i)
+        np.random.seed(i)
         print("clase ",i+1)
         disp_x = int(input("indique la dispersion en x de la clase \n"))
         disp_y = int(input("indique la dispersion en y de la clase \n"))
