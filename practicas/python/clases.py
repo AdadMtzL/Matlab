@@ -167,6 +167,8 @@ def menu():
         elif( opc == 7):
             max_prob()
             menu()
+        elif(opc == 0):
+            break
         elif(opc<0 or opc >7):
             menu()
 
