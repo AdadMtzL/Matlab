@@ -155,7 +155,7 @@ def menu():
             ver_instancias()
             menu()
         elif( opc == 4):
-            no_clase = input("Indique la clase a ver")
+            no_clase = int(input("Indique la clase a ver"))
             ver_clase(no_clase) 
             menu()           
         elif( opc == 5):
