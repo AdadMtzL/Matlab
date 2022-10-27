@@ -126,15 +126,16 @@ parametros int
 return none
 '''
 def ver_clase(no_clase):
+    clase = no_clase-1
     print("------------------------------------------")
     print("clase ",no_clase+1)
-    print("cantidad de elementos: ",creadas[no_clase].cant)
-    print("disperson eje x: ",creadas[no_clase].dispx)
-    print("dispersion eje y: ",creadas[no_clase].dispy)
-    print("centroide eje x: ",creadas[no_clase].cenx)
-    print("centroide eje y: ",creadas[no_clase].ceny)
-    print("vectores en x: ",creadas[no_clase].vecx)
-    print("vectores en y: ",creadas[no_clase].vecy)
+    print("cantidad de elementos: ",creadas[clase].cant)
+    print("disperson eje x: ",creadas[clase].dispx)
+    print("dispersion eje y: ",creadas[clase].dispy)
+    print("centroide eje x: ",creadas[clase].cenx)
+    print("centroide eje y: ",creadas[clase].ceny)
+    print("vectores en x: ",creadas[clase].vecx)
+    print("vectores en y: ",creadas[clase].vecy)
     print("------------------------------------------")
 
 def menu():
