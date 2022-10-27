@@ -1,7 +1,13 @@
+#importación de lo necesario
 import random as rd
+from statistics import median
 import numpy as np
 from tokenize import Double
 
+#declaración de las variables globales
+global vector
+
+#Asignación de los elementos propios de la clase
 class Conj:
     def __init__(self,cant, dispx, dispy, cenx, ceny, vecx, vecy):
         self.cant=cant
@@ -17,6 +23,7 @@ class Conj:
 creadas = []
 vec_x = []
 vec_y = []
+
 
 '''
 Función encargada de crear las n clases con n elementos
@@ -88,6 +95,41 @@ def iniciar():
     ver_instancias()
     print("vector a clasfificar: ",vector)
 
+'''
+Función encargada de obtener la distancia euclidiana
+
+parametros list, list
+
+return list
+'''
+def euclidiana():
+    distancia_euc= []
+    for no_clase in range(0,len(creadas)):
+        media_x = np.mean(creadas[no_clase].vecx)
+        media_y = np.mean(creadas[no_clase].vecy)
+        r1 = vector[0]-media_x
+        r2 = vector[0]-media_x
+        distancia_euc.append(np.sqrt(np.power(r1)+np.power(r2)))
+
+'''
+Función encargada de obtener la distancia de mahalahobis
+
+parametros list, list
+
+return list
+'''
+def mahalahobis():
+    distancia_mah = []
+
+'''
+Función encargada de obtener la probabilidad de pertenencia (maxima probabilidad)
+
+parametros list, list
+
+return list
+'''
+def euclidiana():
+    probs = []
 
 '''
 Segmento de código necesario para iniciaizar el programa
