@@ -128,7 +128,7 @@ return none
 def ver_clase(no_clase):
     clase = no_clase-1
     print("------------------------------------------")
-    print("clase ",no_clase+1)
+    print("clase ",no_clase)
     print("cantidad de elementos: ",creadas[clase].cant)
     print("disperson eje x: ",creadas[clase].dispx)
     print("dispersion eje y: ",creadas[clase].dispy)
