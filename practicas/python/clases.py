@@ -12,14 +12,24 @@ class Conj:
         self.vecx=vecx
         self.vecy=vecy
     
+
+##Declaración de los vectores que guardaran la información necesaria
 creadas = []
 vec_x = []
 vec_y = []
 
+'''
+Función encargada de crear las n clases con n elementos
+
+parametros int
+
+return list
+
+'''
 def crear_clases(cantidad_clases):
     cantidad_elem=int(input("indique la cantidad de elementos por clase \n"))
     for i in range(0,cantidad_clases):
-        np.random.seed(rd.random()*(rd.random())*35)
+        np.random.seed(rd.random()*(rd.random())*35+i)
         print("clase ",i+1)
         disp_x = int(input("indique la dispersion en x de la clase \n"))
         disp_y = int(input("indique la dispersion en y de la clase \n"))
@@ -31,6 +41,13 @@ def crear_clases(cantidad_clases):
         creadas.append(Conj(cantidad_elem,disp_x,disp_y,cen_x,cen_y,vec_x,vec_y))
     return creadas
 
+'''
+Función encargada de ver todas las clases generadas
+
+parametros none
+
+return none
+'''
 def ver_instancias():
     for j in range(0,len(creadas)):  
         print("------------------------------------------")
@@ -44,12 +61,26 @@ def ver_instancias():
         print("vectores en y: ",creadas[j].vecy)
         print("------------------------------------------")
 
+'''
+Función encargada de obtener la coordenada x,y del vector a clasificar
+
+Parametros none
+
+return list
+'''
 def declarar_vector():
     vx=input("indique la coordenada x del vector \n")
     vy=input("indique la coordenada x del vector \n")
     vector=[int(vx),int(vy)]
     return vector
 
+'''
+Función encargada de dar inicio a la generación de clases y obtención del vector desconocido
+
+prarametros none
+
+return none
+'''
 def iniciar():
     vector=declarar_vector()
     cant_clases=int(input("inidique la cantidad de clases a generar \n"))
@@ -57,6 +88,10 @@ def iniciar():
     ver_instancias()
     print("vector a clasfificar: ",vector)
 
+
+'''
+Segmento de código necesario para iniciaizar el programa
+'''
 if __name__ != '__clases__':
     print("iniciando programa")
     iniciar()
