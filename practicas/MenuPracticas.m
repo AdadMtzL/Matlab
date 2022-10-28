@@ -6,7 +6,7 @@ disp('Welcome to pattern recognition')
 
 continuar = 1;
 while continuar ~= 0
-    opc =  menu('Menú de practicas seleccione la opción que desea:','1. Clasificador de distancia Euclidiana','2. Clasificador de distancia de Mahalanobis','3.-maxima probabilidad','4.- Maxima probabilidad','5.Salir');
+    opc =  menu('Menú de practicas seleccione la opción que desea:','1. Clasificador de distancia Euclidiana','2. Clasificador de distancia de Mahalanobis','3.-maxima probabilidad','4.Salir');
     switch opc
         case 1
             disp('Clasificador por distancia euclidiana con 6 clases')
@@ -197,6 +197,12 @@ while continuar ~= 0
             c4 = [34 28 44 37 50; 120 165 135 92 171];
             c5 = [138 128 100 125 115; 37 16 36 70 65];
             c6 = [40 35 54 40 50;95 100 56 80 35];
+
+            %obtención del vector desconocido
+            vectorx=input('Indique lac coordenada x del vector no clasificado ');
+            vectory=input('Indique la coordenada y del vector no clasificado ');
+            vector=[vectorx;vectory];
+
             %calculo de medias
             media1=mean(c1,2);
             media2=mean(c2,2);
