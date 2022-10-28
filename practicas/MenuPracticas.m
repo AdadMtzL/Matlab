@@ -191,12 +191,12 @@ while continuar ~= 0
         case 3
             disp('Clasificador de maxima probabilidad')
             %clases para el clasificador de maxima probabilidad
-            c1 = [134 148 114 187 150 ; 77 116 116 103 72];
-            c2 = [133 87 65 32 99; 36 35 15 42 51];
-            c3 = [-34 -28 -64 -47 -70; -57 -16 -16 -43 -42];
-            c4 = [34 28 44 37 50; 186 165 135 92 171];
-            c5 = [134 128 160 137 100; -37 -16 -36 -63 -22];
-            c6 = [-110 -17 -54 -107 -50;47 96 56 93 22];
+            c1 = [134 148 114 120 150 ; 77 116 116 60 72];
+            c2 = [110 87 67 62 99; 36 35 15 45 51];
+            c3 = [34 40 64 47 70; 57 20 16 43 42];
+            c4 = [34 28 44 37 50; 120 165 135 92 171];
+            c5 = [138 128 100 125 115; 37 16 36 70 65];
+            c6 = [40 35 54 40 50;95 100 56 80 35];
             %calculo de medias
             media1=mean(c1,2);
             media2=mean(c2,2);
@@ -289,6 +289,8 @@ while continuar ~= 0
              plot(c6(1,:),c6(2,:),'mh','MarkerFaceColor','m','MarkerSize',10)
              plot(vector(1,:),vector(2,:),'y^','MarkerFaceColor','y','MarkerSize',5)
              legend('Clase 1','Clase 2','Clase 3','Clase 4','Clase 5','Clase 6','vector no clasificado');
+
+             continuar = input('Desea regresar al menú? 0.No, 1.Si ');
 
         case 4
             disp('Hasta luego')
