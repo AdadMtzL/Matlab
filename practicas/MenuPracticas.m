@@ -6,7 +6,7 @@ disp('Welcome to pattern recognition')
 
 continuar = 1;
 while continuar ~= 0
-    opc =  menu('Menú de practicas seleccione la opción que desea:','1. Clasificador de distancia Euclidiana','2. Clasificador de distancia de Mahalanobis','3.-maxima probabilidad','4.Salir');
+    opc =  menu('Menú de practicas seleccione la opción que desea:','1. Clasificador de distancia Euclidiana','2. Clasificador de distancia de Mahalanobis','3.-maxima probabilidad','4.- Maxima probabilidad','5.Salir');
     switch opc
         case 1
             disp('Clasificador por distancia euclidiana con 6 clases')
