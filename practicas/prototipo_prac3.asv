@@ -17,44 +17,42 @@ colores = ['r' 'g' 'b' 'c' 'm' 'y' 'k'];
 nc=1;
 while (opc~=0)
     opc = menu();
-    if opc == 1 %definir vector desconocido
+    if opc == 1
         vector = definir_vector();
         tmp1=vector;
         opc = menu();
-    elseif opc == 2 %creacion de clases
+    elseif opc == 2 
         cant_clases = input('Indique la cantidad de clases a crear ');
         elementos_clase = input('Indique los elementos por clase ');
         clases = crear_clases(cant_clases,elementos_clase);
         tmp2 = clases;
         opc = menu();
-    elseif opc == 3 %ya funciona, hay que seleccionar 2 veces
+    elseif opc == 3 %estan fallando todas las relacionadas a imprimir
         try
-            fprintf("%f \n %f",tmp1(1,:),tmp1(2,:));
+            fprintf("%f "tmp1);
             opc = menu();
         catch
             fprintf("Error al imprimirlo\n");
             opc = menu();
         end
-    elseif opc == 4 %ver clase en especifico
+    elseif opc == 4 
         try
             ncl = input('Indique la clase a ver --------> ');
             temp = [cell2mat(tmp2(1,ncl));cell2mat(tmp2(2,ncl))];
-            fprintf("%f , %f \n",temp(1,:),temp(2,:));
+            print("%f \n %f",temp(1,:),temp(2,:));
             opc = menu();
         catch
             fprintf("Error al imprimir");
             opc = menu();
         end
-    elseif opc == 5 %ver clases
+    elseif opc == 5 
         try
             for no = 1:1:cant_clases
                 temp = [cell2mat(tmp2(1,no));cell2mat(tmp2(2,no))];
                 fprintf("clase %d \n",no);
-                fprintf("x: \n");
-                fprintf("%f  ",temp(1,:));
-                fprintf("\ny: \n");
-                fprintf("%f  ",temp(2,:));
-                fprintf("\n--------------------------------\n");
+                fprintf(temp(1,:));
+                fprintf(temp(2,:));
+                fprintf("--------------------------------");
             end
             opc = menu();
         catch
