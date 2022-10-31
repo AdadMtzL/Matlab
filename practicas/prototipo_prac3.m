@@ -62,11 +62,15 @@ while (opc~=0)
             opc = menu();
         end
     elseif opc == 6 %distancia euclidiana
+        etiquetas_grupo=["vector-desconocido "];
+        plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
+        hold on
+        grid on
         for elem = 1:1:cant_clases
             clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
             media=mean(clas_ac,2);
-            distancia_calculada=norm(tmp1-media);
-            if(indice==1)
+            distancia_calculada=norm(clas_ac-media);
+            if(elem==1)
                 distancia_minima=distancia_calculada;
                 clase_pert=elem;
             else
@@ -76,23 +80,19 @@ while (opc~=0)
                 end
             end
             %ploteo del vector desconocido
-            etiquetas_grupo=["vector-desconocido "];
-            plot(tmp1(1,:),tmp1(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
-            hold on
-            grid on
             if(nc>7)
                 nc=1;
                 nf=nf+1;
                 figs=[colores(nc) figuras(nf)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 nc=nc+1;
             else
                 figs=[colores(nc) figuras(nf)];
                 cl=[colores(nc)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 etiquetas_ind=split(etiquetas_grupo);
                 legend(etiquetas_ind);
@@ -101,15 +101,19 @@ while (opc~=0)
         end
         opc = menu();
     elseif opc == 7 %distancia mahalahobis
+        etiquetas_grupo=["vector-desconocido "];
+        plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
+        hold on
+        grid on
         for elem = 1:1:cant_clases
             clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
             media=mean(clas_ac,2);
             matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
             matriz_covarianza_inversa=inv(matriz_covarianza);
-            diferenia_vector_clase=tmp1-media;
+            diferenia_vector_clase=clase_ac-media;
             diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
             distancia_calculada_mahalobis=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
-            if(indice==1)
+            if(elem==1)
                 distancia_minima=distancia_calculada_mahalobis;
                 clase_pert=elem;
             else
@@ -119,23 +123,19 @@ while (opc~=0)
                 end
             end
             %ploteo
-            etiquetas_grupo=["vector-desconocido "];
-            plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
-            hold on
-            grid on
             if(nc>7)
                 nc=1;
                 nf=nf+1;
                 figs=[colores(nc) figuras(nf)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
                 nombre=string(" clase-"+indice);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 nc=nc+1;
             else
                 figs=[colores(nc) figuras(nf)];
                 cl=[colores(nc)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                plot(clase_ac(1,:),clase_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 etiquetas_ind=split(etiquetas_grupo);
                 legend(etiquetas_ind);
