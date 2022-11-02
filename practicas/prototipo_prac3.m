@@ -6,7 +6,7 @@ warning off all
 %Martinez Luna Adad Marcel
 %Campos Ocampo Johan
 %chema
-%Fecha: 13/10/22
+%Fecha: 31/10/22
 
 %código principal
 opc = 1;

@@ -6,7 +6,7 @@ warning off all
 %Martinez Luna Adad Marcel
 %Campos Ocampo Johan
 %chema
-%Fecha: 13/10/22
+%Fecha: 02/11/22
 
 %código principal
 opc = 1;
@@ -62,11 +62,15 @@ while (opc~=0)
             opc = menu();
         end
     elseif opc == 6 %distancia euclidiana
+        etiquetas_grupo=["vector-desconocido "];
+        plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
+        hold on
+        grid on
         for elem = 1:1:cant_clases
             clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
             media=mean(clas_ac,2);
             distancia_calculada=norm(clas_ac-media);
-            if(indice==1)
+            if(elem==1)
                 distancia_minima=distancia_calculada;
                 clase_pert=elem;
             else
@@ -76,23 +80,19 @@ while (opc~=0)
                 end
             end
             %ploteo del vector desconocido
-            etiquetas_grupo=["vector-desconocido "];
-            plot(tmp(1,:),tmp1(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
-            hold on
-            grid on
             if(nc>7)
                 nc=1;
                 nf=nf+1;
                 figs=[colores(nc) figuras(nf)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 nc=nc+1;
             else
                 figs=[colores(nc) figuras(nf)];
                 cl=[colores(nc)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 etiquetas_ind=split(etiquetas_grupo);
                 legend(etiquetas_ind);
@@ -101,15 +101,19 @@ while (opc~=0)
         end
         opc = menu();
     elseif opc == 7 %distancia mahalahobis
+        etiquetas_grupo=["vector-desconocido "];
+        plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
+        hold on
+        grid on
         for elem = 1:1:cant_clases
             clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
             media=mean(clas_ac,2);
             matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
             matriz_covarianza_inversa=inv(matriz_covarianza);
-            diferenia_vector_clase=tmp1-media;
+            diferenia_vector_clase=clase_ac-media;
             diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
             distancia_calculada_mahalobis=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
-            if(indice==1)
+            if(elem==1)
                 distancia_minima=distancia_calculada_mahalobis;
                 clase_pert=elem;
             else
@@ -119,23 +123,84 @@ while (opc~=0)
                 end
             end
             %ploteo
-            etiquetas_grupo=["vector-desconocido "];
-            plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
-            hold on
-            grid on
             if(nc>7)
                 nc=1;
                 nf=nf+1;
                 figs=[colores(nc) figuras(nf)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
                 nombre=string(" clase-"+indice);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 nc=nc+1;
             else
                 figs=[colores(nc) figuras(nf)];
                 cl=[colores(nc)];
-                plot(clase_x(1,:),clase_y(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                plot(clase_ac(1,:),clase_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
+                etiquetas_grupo=etiquetas_grupo.append(nombre);
+                etiquetas_ind=split(etiquetas_grupo);
+                legend(etiquetas_ind);
+                nc=nc+1;
+            end
+        end
+        opc = menu();
+    elseif opc == 8 %Maxima probabilidad
+        etiquetas_grupo=["vector-desconocido "];
+        plot(vector(1,:),vector(2,:),'kh','MarkerFaceColor','g','MarkerSize',15);
+        hold on
+        grid on
+        sup={1,cant_clases};
+        inf={1,cant_clases};
+        probabilidades = {1,cant_clases};
+        distancias_calculadas_mahalahobis={1,cant_clases};
+        Probas = {1,cant_clases};
+
+        for elem = 1:1:cant_clases
+            clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
+            media=mean(clas_ac,2);
+            matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
+            matriz_covarianza_inversa=inv(matriz_covarianza);
+            diferenia_vector_clase=clase_ac-media;
+            diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
+            
+            distancias_calculadas_mahalahobis{elem}=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
+            
+            sup{elem}=exp(-0.5*(distancias_calculadas_mahalahobis{elem}));
+            inf{elem}=(2*pi)*det(matriz_covarianza)^(0.5);
+
+            probabilidades{elem}=sup{elem}/inf{elem};
+
+        end
+
+        for elem = 1:1:cant_clases-1
+            Sumatoria = probabilidades{elem}+probabilidades{elem+1};
+        end
+
+        for elem = 1:1:cant_clases-1
+            probas{elem}=probabilidades{elem}/sumatoria;
+        end
+        
+        Max_prob=max(max(probas));
+        clase = find(max_prob=probas);
+
+        frpintf("El vector tiene un %f de probabilidad de pertenecer a la clase %d",Max_prob,clase);
+
+        for elem = 1:1:cant_clases
+            
+            clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
+            %ploteo
+            if(nc>7)
+                nc=1;
+                nf=nf+1;
+                figs=[colores(nc) figuras(nf)];
+                plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
                 nombre=string(" clase-"+indice);
+                etiquetas_grupo=etiquetas_grupo.append(nombre);
+                nc=nc+1;
+            else
+                figs=[colores(nc) figuras(nf)];
+                cl=[colores(nc)];
+                plot(clase_ac(1,:),clase_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 etiquetas_ind=split(etiquetas_grupo);
                 legend(etiquetas_ind);
@@ -146,7 +211,7 @@ while (opc~=0)
     elseif opc == 0
         fprintf("Hasta luego\n");
         break
-    elseif opc > 7 || opc<0 
+    elseif opc > 8 || opc<0 
         opc = menu();
     end
 end
@@ -158,7 +223,7 @@ function m = menu()
     fprintf("Las operaciones disponibles son las siguientes: \n");
     fprintf("0.- salir\n1.- Definir el vector desconocido\n2.-Definir clases\n");
     fprintf("3.- ver el vector a clasificar\n4.-Ver clase\n5.-Ver las clases\n");
-    fprintf("6.-Distancia euclidiana\n7.- Distancia mahalahobis \n-------------------------\n");
+    fprintf("6.-Distancia euclidiana\n7.- Distancia mahalahobis\n8.-maxima probabilidad\n-------------------------\n");
     m = input('Indique otra operación a realizar  ----->  ');
 end
 
