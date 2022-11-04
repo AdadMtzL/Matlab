@@ -99,6 +99,7 @@ while (opc~=0)
                 nc=nc+1;
             end
         end
+        fprintf("El vector pertenece a la clase %d",clase_pert);
         opc = menu();
     elseif opc == 7 %distancia mahalahobis
         etiquetas_grupo=["vector-desconocido "];
@@ -142,6 +143,7 @@ while (opc~=0)
                 nc=nc+1;
             end
         end
+        fprintf("El vector pertenece a la clase %d",clase_pert);
         opc = menu();
     elseif opc == 0
         fprintf("Hasta luego\n");
