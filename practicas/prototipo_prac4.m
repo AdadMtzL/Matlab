@@ -219,7 +219,7 @@ end
 
 %Memu de opciones
 function m = menu()
-    fprintf("\nBienvenido a la práctica 3 de pattern recognition \n");
+    fprintf("\nBienvenido a la práctica 4 de pattern recognition \n");
     fprintf("Las operaciones disponibles son las siguientes: \n");
     fprintf("0.- salir\n1.- Definir el vector desconocido\n2.-Definir clases\n");
     fprintf("3.- ver el vector a clasificar\n4.-Ver clase\n5.-Ver las clases\n");
