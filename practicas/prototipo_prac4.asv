@@ -184,13 +184,9 @@ while (opc~=0)
         
         probas=cell2mat(Probas)
         Max_prob=max(max(probas));
-        for ind =1:1:cant_clases
-            if Max_prob==probas[ind]
-                clase_pert=ind;
-            end
-        end
+        for 
 
-        frpintf("El vector tiene un %f de probabilidad de pertenecer a la clase %d",Max_prob,clase_pert);
+        frpintf("El vector tiene un %f de probabilidad de pertenecer a la clase %d",Max_prob,clase);
 
         for elem = 1:1:cant_clases
             
