@@ -111,7 +111,7 @@ while (opc~=0)
             media=mean(clas_ac,2);
             matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
             matriz_covarianza_inversa=inv(matriz_covarianza);
-            diferenia_vector_clase=clase_ac-media;
+            diferenia_vector_clase=clas_ac-media;
             diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
             distancia_calculada_mahalobis=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
             if(elem==1)
@@ -129,7 +129,7 @@ while (opc~=0)
                 nf=nf+1;
                 figs=[colores(nc) figuras(nf)];
                 plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 nc=nc+1;
             else
@@ -154,14 +154,13 @@ while (opc~=0)
         inf={1,cant_clases};
         probabilidades = {1,cant_clases};
         distancias_calculadas_mahalahobis={1,cant_clases};
-        Probas = {1,cant_clases};
 
         for elem = 1:1:cant_clases
             clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
             media=mean(clas_ac,2);
             matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
             matriz_covarianza_inversa=inv(matriz_covarianza);
-            diferenia_vector_clase=clase_ac-media;
+            diferenia_vector_clase=clas_ac-media;
             diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
             
             distancias_calculadas_mahalahobis{elem}=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
@@ -176,7 +175,7 @@ while (opc~=0)
         for elem = 1:1:cant_clases-1
             Sumatoria = probabilidades{elem}+probabilidades{elem+1};
         end
-
+        Probas = {1,cant_clases};
         for elem = 1:1:cant_clases-1
             probas{elem}=probabilidades{elem}/sumatoria;
         end
@@ -195,13 +194,13 @@ while (opc~=0)
                 nf=nf+1;
                 figs=[colores(nc) figuras(nf)];
                 plot(clas_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
-                nombre=string(" clase-"+indice);
+                nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 nc=nc+1;
             else
                 figs=[colores(nc) figuras(nf)];
                 cl=[colores(nc)];
-                plot(clase_ac(1,:),clase_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
+                plot(clase_ac(1,:),clas_ac(1,:),(figs(1,:)),'MarkerFaceColor',(cl(1,:)),'MarkerSize',5);
                 nombre=string(" clase-"+elem);
                 etiquetas_grupo=etiquetas_grupo.append(nombre);
                 etiquetas_ind=split(etiquetas_grupo);
