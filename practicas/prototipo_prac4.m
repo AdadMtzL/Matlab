@@ -185,7 +185,7 @@ while (opc~=0)
         probas=cell2mat(Probas)
         Max_prob=max(max(probas));
         for ind =1:1:cant_clases
-            if Max_prob==probas[ind]
+            if Max_prob==probas(ind)
                 clase_pert=ind;
             end
         end
