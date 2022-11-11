@@ -190,7 +190,7 @@ while (opc~=0)
             end
         end
 
-        frpintf("El vector tiene un %f de probabilidad de pertenecer a la clase %d",Max_prob,clase_pert);
+        fprintf("El vector tiene un %f de probabilidad de pertenecer a la clase %d",Max_prob,clase_pert);
 
         for elem = 1:1:cant_clases
             
