@@ -3,17 +3,16 @@ clear all %limpia todas las variables
 close all %cierra todo
 warning off all %evita llamadas de atención
 %Hacer grupos relacionando distancias
-%Paso previo: pedir n, n puntos xy
-%Primer paso: "Ubicar los puntos en una grafica cuadriculada"
-%Segundo paso: "Hacer una tabla donde las filas y columnas sean los numeros
-%de los puntos"
-%Tercer paso: "Llenar la tabla calculando la distancia más corta entre los
-%puntos de cada celda"
-%Cuarto paso: "Buscar el primer grupo que tenga menor distancia entre algun
-%punto, juntar y hacer nuevo punto de nombre n+1"
-%Quinto paso: repetir los pasos del 2 al 4 quitando los puntos en grupo y
-%agregando el nuevo punto
-%Notas:
+%Notas: Al ocupar siempre los mismos puntos, las distancias nunca varian,
+%por lo que no hay que solo hay que calcular distancias una vez y de ahí
+%con los grupos, hacer comparativas y respetar jerarquias.
+%Nuevos pasos
+
+%Paso previo: calcular todas las distancias entre los puntos y hacer una tabla
+%con distancias de menor a mayor desde cada punto.
+%Nota paso previo: No nos interesa la distancia del punto entre si mismo.
+%Paso 1: tomar el primer valor de cada tabla y obtener el primer grupo con
+%la menor distancia entre ellos.
 
 
 %variables
@@ -30,24 +29,20 @@ cantidadPuntos = n;
 for i = 1 : n
     x = input("Valor en x del punto "+i);
     y = input("Valor en y del punto "+i);
+    %composición de puntos: [coordenada x, coordenada y, identificador]
     puntos(i) = [x,y,i]; 
 end
 
-%Paso 1: no necesario hacer
-%Paso 5
-contador = 1;
-puntosAux = puntos;
-while cantidadPuntos ~= 1
-    minimo = 1;
-    puntoMinimo1 = 0;
-    puntoMinimo2 = 0;
-    %Paso 2: no es necesario hacer, solo requerimos la operación y el valor
-    %resultante
-    %Paso 3
-    for i = 1 : cantidadPuntos
-        puntoColumna = puntosAux(i);
-        for j = 1 : cantidadPuntos
-            puntoFila = puntosAux(j);
+%Paso previo
+nuevoGrupo = 1;
+for i = 1 : n
+    puntoColumna = puntos(i);
+    grupo = [];
+    contador = 1;
+    for j = 1 : n
+        %Nota
+        if i ~= j
+            puntoFila = puntos(j);
             distanciaX = puntoColumna(1)-puntoFila(1);
             distanciaY = puntoColumna(2)-puntoFila(2);
             if distanciaX < 0
@@ -57,32 +52,25 @@ while cantidadPuntos ~= 1
                 distanciaY = distanciaY * -1;
             end
             distancia = distanciaX + distanciaY;
-            if i == 1 && j == 2
-                minimo = distancia;
-                puntoMinimo1 = puntoColumna(3);
-                puntoMinimo2 = puntoFila(3);
-            else
-                if distancia == 0
-                    continue;
-                elseif distancia <= minimo
-                    minimo = distancia;
-                    puntoMinimo1 = puntoColumna(3);
-                    puntoMinimo2 = puntoFila(3);
-                end
-            end
+            grupo(contador) = [puntoFila(3),distancia];
+            contador = contador + 1;
         end
     end
-    grupos(contador) = [puntoMinimo1,puntoMinimo2,distancia];
-    contador = contador + 1;
-    puntosAux = restablecerPuntos(puntosAux, puntoMinimo1, puntoMinimo2, cantidadPuntos);
+    %Funcion para organizar los puntos
+
+    %Agregamos el grupo a nuestro array de grupos
+    
 end
 
-function [puntosNuevos] = restablecerPuntos(puntos, punto1, punto2, n)
-    for i = 1 : n
-        if puntos(i) == punto1
-            
-        elseif puntos(i) == punto2
-        
-        end
-    end
-end
+
+%Pasos vistos en clase
+%Paso previo: pedir n, n puntos xy
+%Primer paso: "Ubicar los puntos en una grafica cuadriculada"
+%Segundo paso: "Hacer una tabla donde las filas y columnas sean los numeros
+%de los puntos"
+%Tercer paso: "Llenar la tabla calculando la distancia más corta entre los
+%puntos de cada celda"
+%Cuarto paso: "Buscar el primer grupo que tenga menor distancia entre algun
+%punto, juntar y hacer nuevo punto de nombre n+1"
+%Quinto paso: repetir los pasos del 2 al 4 quitando los puntos en grupo y
+%agregando el nuevo punto
