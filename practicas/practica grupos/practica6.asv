@@ -19,16 +19,16 @@ warning off all %evita llamadas de atención
 n = 0;
 x = 0;
 y = 0;
-puntos = [];
+puntos = [0];
 minimo = 1;
 
 grupos = [0];
 %Paso previo
-n = input("Digite la cantidad de puntos\n");
+n = input("Digite la cantidad de puntos");
 cantidadPuntos = n;
 for i = 1 : n
-    x = input("Valor en x del punto "+i+"\n");
-    y = input("Valor en y del punto "+i+"\n");
+    x = input("Valor en x del punto "+i);
+    y = input("Valor en y del punto "+i);
     %composición de puntos: [coordenada x, coordenada y, identificador]
     puntos(i) = [x,y,i]; 
 end
@@ -109,23 +109,10 @@ function [grupoOrdenado] = ordenarMenorMayor(grupo,total)
                 break;
             end
         end
-        
         if posicion ~= 0
-            %se encontro que fue igual o menor a un punto ya guardado en el
-            %ordenado
-            auxOrdenado = grupoOrdenado;
-            %guardamos el punto en la posicion encontrada
-            grupoOrdenado(posicion) = punto; 
-            %agregamos los demas puntos que teniamos despues de este punto
-            %nuevo
-            for i=posicion : aumento
-                grupoOrdenado(i+1) = auxOrdenado(i);
-            end
-            aumento = aumento + 1;
+
         elseif posicion == 0
-            %Si no fue menor a ninguno ya guardado, se guarda al final
-            grupoOrdenado(aumento) = punto;
-            aumento = aumento + 1;
+            grupoOrdenado(aumento) = pu
         end
     end
 end
