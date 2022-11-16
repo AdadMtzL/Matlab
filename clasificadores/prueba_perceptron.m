@@ -22,8 +22,7 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
 %X_n^T W>=0 => X_n in C_1 --> Wn+1 = Wn-rXn
 %X_n^T W<=0 => X_n in C_2 --> Wn+rXn
 %r>0
-        
-%%for ind = 1:1:4
+
     if ind == 1 && iteraciones == 1
         fprintf("Iteración %d\n[%d , %d]",iteraciones,clas1(1),clas1(2));
         X=[clas1(1),clas1(2),x0]%x
@@ -82,7 +81,6 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
             end
         end
     end
-        %%end
     ind = ind+1;
         
 end
