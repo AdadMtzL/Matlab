@@ -340,7 +340,7 @@ while(opc~=0)
         fprintf("Ecuación: x2 = %f X %f \n",M,B);
         for tmp = 0:0.05:1
             cx=tmp;
-            y=M*cx - B; 
+            y=M*cx + B; 
             plot(cx,y,'r*','MarkerFaceColor','r','MarkerSize',10);
         end
         legend('Clase 1','Clase 2','pendiente');

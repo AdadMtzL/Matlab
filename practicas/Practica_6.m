@@ -29,25 +29,25 @@ w2_xy=1;
 cambios_xy=[1,1,1,1,1,1,1,1];
 ind_xy=1;
 
-fprintf("*-----------------------XY----------------------------*\n");
-fprintf("X \n");
-fprintf("c1 \n");
-clas1(1,:)
-fprintf("c2 \n");
-clas2(1,:)
-fprintf("Y \n");
-fprintf("c2 \n");
-clas2(2,:)
-fprintf("c1 \n");
-clas1(2,:)
+%fprintf("*-----------------------XY----------------------------*\n");
+%fprintf("X \n");
+%fprintf("c1 \n");
+%las1(1,:)
+%fprintf("c2 \n");
+%clas2(1,:)
+%fprintf("Y \n");
+%fprintf("c2 \n");
+%clas2(2,:)
+%fprintf("c1 \n");
+%clas1(2,:)
 
 while (cambios_xy(1)==1 || cambios_xy(2)==1 || cambios_xy(3)==1 || cambios_xy(4)==1) || ind_xy~=9
     %X_n^T W>=0 => X_n in C_1 --> Wn+1 = Wn-rXn
     %X_n^T W<=0 => X_n in C_2 --> Wn+rXn
     %r>0
-    fprintf("\nIteración %d \n",iteraciones_xy);
+    %fprintf("\nIteración %d \n",iteraciones_xy);
     if ind_xy < 5 && iteraciones_xy == 1
-        fprintf("[%d , %d]\n",clas1(1,ind_xy),clas1(2,ind_xy));
+        fprintf("******\n[%d , %d]\n",clas1(1,ind_xy),clas1(2,ind_xy));
         X_xy=[clas1(1,ind_xy),clas1(2,ind_xy),x0_xy];%x
         W_xy=[w1_xy,w2_xy,w0_xy];%w
         Wt_xy=W_xy';%trans w
@@ -59,12 +59,17 @@ while (cambios_xy(1)==1 || cambios_xy(2)==1 || cambios_xy(3)==1 || cambios_xy(4)
             W_xy=Wt_xy';%w
             cambios_xy(ind_xy)=1;
             c_xy = cambios_xy(ind_xy);
+            if ind_xy == 3
+                temp=W_xy;
+                f_temp = fsal_xy;
+                vecx=X_xy;
+            end
         else
             cambios_xy(ind_xy)=0;
             c_xy = cambios_xy(ind_xy);
         end
     elseif ind_xy < 5 && iteraciones_xy > 1
-        fprintf("[%d , %d]\n",clas1(1,ind_xy),clas1(2,ind_xy));
+        fprintf("******\n[%d , %d]\n",clas1(1,ind_xy),clas1(2,ind_xy));
         X_xy=[clas1(1,ind_xy),clas1(2,ind_xy),x0_xy];%x
         fsal_xy=X_xy*Wt_xy;
         Xt_xy=X_xy';
@@ -86,7 +91,7 @@ while (cambios_xy(1)==1 || cambios_xy(2)==1 || cambios_xy(3)==1 || cambios_xy(4)
         x1=clas2(1,ind_xy-4);
         x2=clas2(2,ind_xy-4);
         fprintf("\n    ----------------------------------------    \n");
-        fprintf("[%d , %d]\n",x1,x2);
+        fprintf("******\n[%d , %d]\n",x1,x2);
         X_xy=[x1,x2,x0_xy];%x
         W_xy;
         Wt_xy=W_xy';
@@ -97,14 +102,31 @@ while (cambios_xy(1)==1 || cambios_xy(2)==1 || cambios_xy(3)==1 || cambios_xy(4)
             Wt_xy=Wt_xy+(r_xy*Xt_xy);
             W_xy=Wt_xy';%w
             cambios_xy(ind_xy)=1;
+            if ind_xy == 5
+                temp2=W_xy;
+                f_temp2 = fsal_xy;
+                vecx2=X_xy;
+            end
         else
             cambios_xy(ind_xy)=0;
             c_xy = cambios_xy(ind_xy);
             if ind_xy == 8 && (cambios_xy(1)==1 || cambios_xy(2)==1 || cambios_xy(3)==1 || cambios_xy(4)==1)
                 ind_xy=0;
                 iteraciones_xy = iteraciones_xy +1;
+                W_xy
+                Wt_xy
+                temp
+                f_temp
+                vecx
+
+                temp2
+                f_temp2
+                vecx2
+
+                cambios_xy
                 fprintf("\n******------------------------------------******\n")
-                %pausa = input('Hola     ');
+                pausa = input('Hola     ');
+                fprintf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n")
             end
         end
     end
@@ -131,10 +153,6 @@ cambios_yz=[1,1,1,1,1,1,1,1];
 ind_yz=1;
 
 fprintf("\n*-----------------------YZ----------------------------*\n");
-clas1(2,:)
-clas1(3,:)
-clas2(2,:)
-clas2(3,:)
 
 
 while (cambios_yz(1)==1 || cambios_yz(2)==1 || cambios_yz(3)==1 || cambios_yz(4)==1) || ind_yz~=9
