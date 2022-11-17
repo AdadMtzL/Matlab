@@ -247,7 +247,7 @@ while(opc~=0)
 
         iteraciones=1; 
         x0=1;
-        w0=0;
+        w0=1;
         
         %r=abs(randn(1,1));
         r=2.5;
