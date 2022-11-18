@@ -3,6 +3,17 @@ clear all
 close all
 warning off all
 
+%Autores:
+%Martinez Luna Adad Marcel
+%Johan Campos Ocampo
+%Jose María (chema)
+%fecha: 17/11/22
+
+%este programa hace uso de un perceptron en 3 dimensiones, de tal manera
+%que permite clasificar un cubo unitario que posee 2 clases con un plano
+%tridimensional, se intento con combinaciones de ejes (xy,xz,yz) pero itera
+%ba infinitamente.
+
 %Declaración de clases
 
 clas1_x=[0,1,1,1];
@@ -20,29 +31,32 @@ clas2 = [clas2_x;clas2_y;clas2_z];
 
 %perceptron de 3 dimensiones
 
-iteraciones_xy=1; 
-x0=1;
+iteraciones=1; %contador de iteraciones
+x0=1; 
 w0=1;
-r=6;
-w1=1;
+r=6; %tiene que ser mayor a 1, con 1 falla
+w1=1; 
 w2=1;
 w3=1;
-cambios=[1,1,1,1,1,1,1,1];
-ind=1;
+cambios=[1,1,1,1,1,1,1,1]; %arreglo que detecta los cambios
+ind=1; %contador de los elementos dentro de la clase
 
 %calculos
-
+%En este caso podria haberce hecho recursivamente, pero es más laborioso
 while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~=9
     %X_n^T W>=0 => X_n in C_1 --> Wn+1 = Wn-rXn
     %X_n^T W<=0 => X_n in C_2 --> Wn+rXn
     %r>0
     %fprintf("\nIteración %d \n",iteraciones_xy);
-    if ind < 5 && iteraciones_xy == 1
+    if ind == 1
+        fprintf("\n+++++++++++++++++++++++++++++__%d__++++++++++++++++++++++++++++++++++\n",iteraciones);
+    end
+    if ind < 5 && iteraciones == 1
         fprintf("******\n[%d , %d]\n",clas1(1,ind),clas1(2,ind));
-        X=[clas1(1,ind),clas1(2,ind),clas1(3,ind),x0];%x
-        W=[w1,w2,w3,w0];%w
+        X=[clas1(1,ind),clas1(2,ind),clas1(3,ind),x0]%x
+        W=[w1,w2,w3,w0]%w
         Wt=W';%trans w
-        fsal=X*Wt;
+        fsal=X*Wt
         Xt=X';
         if fsal >=0
             fprintf("\nMala clasificación \n");
@@ -52,12 +66,12 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
         else
             cambios(ind)=0;
         end
-    elseif ind < 5 && iteraciones_xy > 1
+    elseif ind < 5 && iteraciones > 1
         fprintf("******\n[%d , %d]\n",clas1(1,ind),clas1(2,ind));
-        X=[clas1(1,ind),clas1(2,ind),clas1(3,ind),x0];%x
-        fsal=X*Wt;
+        X=[clas1(1,ind),clas1(2,ind),clas1(3,ind),x0]%x
+        fsal=X*Wt
         Xt=X';
-        W;
+        W
         if fsal >=0
             fprintf("\nMala clasificación \n");
             Wt=Wt-(r*Xt);
@@ -75,10 +89,10 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
         x3=clas2(3,ind-4);
         fprintf("\n    ----------------------------------------    \n");
         fprintf("******\n[%d , %d]\n",x1,x2);
-        X=[x1,x2,x3,x0];%x
-        W;
+        X=[x1,x2,x3,x0]%x
+        W
         Wt=W';
-        fsal=X*Wt;
+        fsal=X*Wt
         if fsal <=0
             fprintf("\nMala clasificación \n");
             Xt=X';
@@ -95,10 +109,8 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
             c_xy = cambios(ind);
             if ind == 8 && (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1)
                 ind=0;
-                iteraciones_xy = iteraciones_xy +1;
-                fprintf("\n******------------------------------------******\n")
-                %pausa = input('Hola     ');
-                fprintf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n")
+                iteraciones = iteraciones +1;
+                fprintf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
             end
         end
     end
@@ -106,13 +118,15 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
 ind = ind+1;
         
 end
-fprintf("Iteraciones: %d\n%f x1 + %f x2 + %f x3 = 1\n",iteraciones_xy,Wt(1),Wt(2),Wt(3));
+fprintf("Iteraciones: %d\n%f x1 + %f x2 + %f x3 = 1\n",iteraciones,Wt(1),Wt(2),Wt(3));
 
+
+%Sección del ploteo tridimensional
 plot3(clas1(1,:),clas1(2,:),clas1(3,:),'r*','MarkerFaceColor','r','MarkerSize',15);
 hold on
 grid on
 plot3(clas2(1,:),clas2(2,:),clas2(3,:),'g+','MarkerFaceColor','g','MarkerSize',15);
-[x,y]=meshgrid(-1.5:0.1:1.5);
+[x,y]=meshgrid(-1:0.1:1.5);
 z=(Wt(1)/-Wt(3))*x+(Wt(2)/-Wt(3))*y+0.5;
 surf(x,y,z);
 
