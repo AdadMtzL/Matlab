@@ -97,7 +97,7 @@ while (cambios(1)==1 || cambios(2)==1 || cambios(3)==1 || cambios(4)==1) || ind~
                 ind=0;
                 iteraciones_xy = iteraciones_xy +1;
                 fprintf("\n******------------------------------------******\n")
-                pausa = input('Hola     ');
+                %pausa = input('Hola     ');
                 fprintf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n")
             end
         end
@@ -112,9 +112,8 @@ plot3(clas1(1,:),clas1(2,:),clas1(3,:),'r*','MarkerFaceColor','r','MarkerSize',1
 hold on
 grid on
 plot3(clas2(1,:),clas2(2,:),clas2(3,:),'g+','MarkerFaceColor','g','MarkerSize',15);
-for a = 0:0.01:1
-    x1=Wt(1)*a;
-    x2=Wt(2)*a;
-    x3=Wt(3)*a;
-    plot3(x1,x2,x3,'c.','MarkerFaceColor','c','MarkerSize',15);
-end
+[x,y]=meshgrid(-1.5:0.1:1.5);
+z=(Wt(1)/-Wt(3))*x+(Wt(2)/-Wt(3))*y+0.5;
+surf(x,y,z);
+
+legend('Clase 1','Clase 2');

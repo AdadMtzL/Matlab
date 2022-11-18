@@ -119,7 +119,7 @@ while(opc~=0)
         fprintf("Ecuación: x2 = %f X %f \n",M,B);
         for tmp = 0:0.05:1
             cx=tmp;
-            y=-1*(Wt(1)*cx)/Wt(2) + 1/Wt(2);
+            y=-1*(Wt(1)*cx)/Wt(2) - 1/Wt(2);
             plot(cx,y,'r*','MarkerFaceColor','r','MarkerSize',10);
         end
         legend('Clase 2','Clase 1','pendiente');
