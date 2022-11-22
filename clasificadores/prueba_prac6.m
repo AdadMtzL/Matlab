@@ -34,7 +34,7 @@ clas2 = [clas2_x;clas2_y;clas2_z];
 iteraciones=1; %contador de iteraciones
 x0=1; 
 w0=1;
-r=6; %tiene que ser mayor a 1, con 1 falla
+r=1; 
 w1=1; 
 w2=1;
 w3=1;
@@ -130,4 +130,4 @@ plot3(clas2(1,:),clas2(2,:),clas2(3,:),'g+','MarkerFaceColor','g','MarkerSize',1
 z=(Wt(1)/-Wt(3))*x+(Wt(2)/-Wt(3))*y+0.5;
 surf(x,y,z);
 
-legend('Clase 1','Clase 2');
+legend('Clase 1','Clase 2','Plano');
