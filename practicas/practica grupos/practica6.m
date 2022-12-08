@@ -28,6 +28,8 @@ warning off all %evita llamadas de atención
 %Paso 3: Eliminamos los grupos unidos y agregamos el nuevo grupo al final
 %de nuestros grupos
 %   Paso 3.1: Se debe cambiar los puntos encontrados en cada grupo por 
+%Paso 4: Repetimos hasta que haya solo un grupo en nuestra tabla
+%Paso 5: Mostrar los grupos encontrados en una grafica de barras
 
 %variables
 n = 0;
@@ -168,7 +170,36 @@ while (nuevoGrupo-aumentoBan) ~= 1
     grupos{nuevoGrupo} = grupoNuevo;
     nuevoGrupo = nuevoGrupo + 1;
 end
+%Paso 5
+%c = ['r','g','b','c','m','y','k'];
+%maximo = 7;
+%contadorColor = 1;
+%for i=1 : contadorGruposAMostrar-1
+%    punto = gruposAMostrar{i};
+%    x = [];
+%    y = [];
+%    x(1) = punto(1);
+%    x(2) = punto(1);
+%    x(3) = punto(2);
+%    x(4) = punto(2);
+%    y(1) = 0;
+%    y(2) = punto(3);
+%    y(3) = 0;
+%    y(4) = punto(3);
+%    hold on;
+%    fill(x,y,c(contadorColor),"FaceAlpha",0.3);
+%    contadorColor = contadorColor + 1;
+%    if contadorColor == 8
+%        contadorColor = 1;
+%    end
+%end
 
+G = cell2mat(gruposAMostrar);
+
+tree = linkage(G,'average');
+
+figure()
+dendrogram(tree)
 
 %Funcion para actualizar los puntos unidos por el nuevo grupo
 function [grupoActualizado] = actualizarPuntosGrupo(grupos, total, puntoUnoCambio, puntoDosCambio)
