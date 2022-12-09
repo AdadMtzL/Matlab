@@ -115,23 +115,23 @@ while (nuevoGrupo-aumentoBan) ~= 1
     %Paso 2
     %composicion de gruposAMostrar: [punto inicio, punto final, distancia]
     %Nota
-    if primerGrupo <= n && minimo(1) <= n
+    %if primerGrupo <= n && minimo(1) <= n
         gruposAMostrar{contadorGruposAMostrar}=[primerGrupo,minimo(1),minimo(2)];
         contadorGruposAMostrar = contadorGruposAMostrar + 1;
-    else
-        valorUno = primerGrupo;
-        valorDos = minimo(1);
-        if  valorUno > n
-            grupo = gruposAMostrar{valorUno-n};
-            valorUno = (grupo(1)+grupo(2))/2;
-        end
-        if  valorDos > n
-            grupo = gruposAMostrar{valorDos-n};
-            valorDos = (grupo(1)+grupo(2))/2;
-        end
-        gruposAMostrar{contadorGruposAMostrar}=[valorUno,valorDos,minimo(2)];
-        contadorGruposAMostrar = contadorGruposAMostrar + 1;
-    end
+    %else
+    %    valorUno = primerGrupo;
+    %    valorDos = minimo(1);
+    %    if  valorUno > n
+    %        grupo = gruposAMostrar{valorUno-n};
+    %        valorUno = (grupo(1)+grupo(2))/2;
+    %    end
+    %    if  valorDos > n
+    %        grupo = gruposAMostrar{valorDos-n};
+    %        valorDos = (grupo(1)+grupo(2))/2;
+    %    end
+    %    gruposAMostrar{contadorGruposAMostrar}=[valorUno,valorDos,minimo(2)];
+    %    contadorGruposAMostrar = contadorGruposAMostrar + 1;
+    %end
     
     %Paso 2.1
     grupoNuevo = [];
@@ -171,35 +171,19 @@ while (nuevoGrupo-aumentoBan) ~= 1
     nuevoGrupo = nuevoGrupo + 1;
 end
 %Paso 5
-%c = ['r','g','b','c','m','y','k'];
-%maximo = 7;
-%contadorColor = 1;
-%for i=1 : contadorGruposAMostrar-1
-%    punto = gruposAMostrar{i};
-%    x = [];
-%    y = [];
-%    x(1) = punto(1);
-%    x(2) = punto(1);
-%    x(3) = punto(2);
-%    x(4) = punto(2);
-%    y(1) = 0;
-%    y(2) = punto(3);
-%    y(3) = 0;
-%    y(4) = punto(3);
-%    hold on;
-%    fill(x,y,c(contadorColor),"FaceAlpha",0.3);
-%    contadorColor = contadorColor + 1;
-%    if contadorColor == 8
-%        contadorColor = 1;
-%    end
-%end
 
 G = cell2mat(gruposAMostrar);
+j = size(gruposAMostrar);
 
-tree = linkage(G,'average');
+Final = reshape(G,[3 j(2)]);
+Final = transpose(Final);
+Final = ordenarSalida(Final,j(2));
 
+X = linkage(Final,"average");
 figure()
-dendrogram(tree)
+dendrogram(Final)
+
+
 
 %Funcion para actualizar los puntos unidos por el nuevo grupo
 function [grupoActualizado] = actualizarPuntosGrupo(grupos, total, puntoUnoCambio, puntoDosCambio)
@@ -281,6 +265,17 @@ function [grupoOrdenado] = ordenarMenorMayor(grupo,total)
             %Si no fue menor a ninguno ya guardado, se guarda al final
             aumento = aumento + 1;
             grupoOrdenado{aumento} = punto;
+        end
+    end
+end
+
+%Funcion para organizar la salida
+function[arregloSort] = ordenarSalida(arreglo,dim)
+    arregloSort = arreglo;
+    for i=1 : dim
+        if arreglo(i,1)>arreglo(i,2)
+            arregloSort(i,1)=arreglo(i,2);
+            arregloSort(i,2)=arreglo(i,1);
         end
     end
 end
