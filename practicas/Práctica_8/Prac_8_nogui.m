@@ -40,26 +40,26 @@ function grupos_creados = CrearGrupos(puntos, cantidad,umbral)
     %reestructuración
     j=1;
     for i = 1:1:cantidad
-        %for i2 = 1:1:j
+        for i2 = 1:1:j
             %distancia = Det_Distancias(puntos(1,i),puntos(2,i),grupos(j))
-        if i == 1
-            %grupos{1} = [puntos(1,1),puntos(2,1)];
-            grupos{j} = [puntos(1,1),puntos(1,2)];            
-        else
-            distancia = Det_Distancias(puntos(i,1),puntos(i,2),grupos(j,:),j);
-            if distancia < umbral
-                longitud=length(grupos{j});
-
-                %grupos{longitud+1,j} =[puntos(1,i),puntos(2,i)];
-                grupos{j,longitud} =[puntos(i,1),puntos(i,2)]
-                fprintf("Longitud del grupo %d es: %d\n",j,longitud);
+            if i == 1
+                %grupos{1} = [puntos(1,1),puntos(2,1)];
+                grupos{j} = [puntos(1,1),puntos(1,2)];            
             else
-                j = j+1;
-                %grupos{j} = [puntos(1,i),puntos(2,i)];
-                grupos{j,1} = [puntos(i,1),puntos(i,2)];
+                distancia = Det_Distancias(puntos(i,1),puntos(i,2),grupos(j,:),j);
+                if distancia < umbral
+                    longitud=length(grupos{j});
+
+                    %grupos{longitud+1,j} =[puntos(1,i),puntos(2,i)];
+                    grupos{j,longitud} =[puntos(i,1),puntos(i,2)]
+                    fprintf("Longitud del grupo %d es: %d\n",j,longitud);
+                else
+                    j = j+1;
+                    %grupos{j} = [puntos(1,i),puntos(2,i)];
+                    grupos{j,1} = [puntos(i,1),puntos(i,2)];
+                end
             end
         end
-        %end
     end
    
     grupos_creados=grupos;
