@@ -43,15 +43,16 @@ function grupos_creados = CrearGrupos(puntos, cantidad,umbral)
             %distancia = Det_Distancias(puntos(1,i),puntos(2,i),grupos(j))
             if i == 1
                 %grupos{1} = [puntos(1,1),puntos(2,1)];
-                grupos{j} = [puntos(1,1),puntos(1,2)];            
+                grupos{j,1} = [puntos(1,1),puntos(1,2)];            
             else
                 [grp_pert,distancia] = Det_Distancias(puntos(i,1),puntos(i,2),grupos,j);
                 if distancia < umbral
-                    longitud=length(grupos{grp_pert});
-
+                    longitud=size(grupos{grp_pert});
+                    l = longitud(2)+1;
                     %grupos{longitud+1,j} =[puntos(1,i),puntos(2,i)];
-                    grupos{grp_pert,longitud} =[puntos(i,1),puntos(i,2)];
-                    fprintf("Longitud del grupo %d es: %d\n",grp_pert,longitud);
+                    grupos{grp_pert,l} =[puntos(i,1),puntos(i,2)];
+                    longitud=size(grupos{grp_pert});
+                    fprintf("Longitud del grupo %d es: %d\n",grp_pert,longitud(2));
                 else
                     j = j+1;
                     %grupos{j} = [puntos(1,i),puntos(2,i)];
@@ -71,9 +72,9 @@ function [grp_pert,dist] = Det_Distancias(puntos_x,puntos_y,grupo,j)
     for ind =1:1:j
         grp_ac=[grupo{ind,:},grupo{ind,:}];
         med = mean(grp_ac,2,'omitnan');
-        dist = norm(A-med);
+        temp = norm(A-med);
         if ind == 1
-            temp = dist;
+            dist = temp;
             grp_pert = ind;
         else
             if (temp < dist)
