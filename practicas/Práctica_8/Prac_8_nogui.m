@@ -72,9 +72,9 @@ function [grp_pert,dist] = Det_Distancias(puntos_x,puntos_y,grupo,j)
     for ind =1:1:j
         grp_ac=[grupo{ind,:}];
         med = mean(grp_ac,2,'omitnan');
-        temp = norm(A-med);
+        dist = norm(A-med);
         if ind == 1
-            dist = temp;
+            temp = dist;
             grp_pert = ind;
         else
             if (temp < dist)
