@@ -27,7 +27,7 @@ hold on
 i=1;
 dims =[1,1];
 while dims(1)<3 || dims(1)>5
-    T = randi([1,3000],1,1);
+    T = randi([1,5000],1,1);
     %fprintf("\n----------------------%d---------------T=%d----\n",i,T);
     grupos = CrearGrupos(puntos,no_pts,T);
     %grupos = CrearGrupos(pts,n,T);
