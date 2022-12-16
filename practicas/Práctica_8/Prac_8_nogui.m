@@ -25,7 +25,7 @@ close all
 %[puntos,info] = Generar_puntos(no_pts,bandera);
 pts = [0,0;3,8;2,2;1,1;5,3;9,8;6,3;5,4;6,4;7,5];
 n=10;
-umbral=3;
+umbral=3; %3
 %grupos = CrearGrupos(puntos,no_pts,umbral);
 grupos = CrearGrupos(pts,n,umbral);
 
@@ -78,8 +78,9 @@ function [grp_pert,dist] = Det_Distancias(puntos_x,puntos_y,grupo,j)
             grp_pert = ind;
         else
             if (temp < dist)
-                dist=temp;
-                grp_pert = ind;
+                dist=temp
+                grp_pert = ind
+                disp(grp_ac)
             end
         end
     end
