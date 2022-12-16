@@ -52,7 +52,7 @@ function grupos_creados = CrearGrupos(puntos, cantidad,umbral)
                     %grupos{longitud+1,j} =[puntos(1,i),puntos(2,i)];
                     grupos{grp_pert,l} =[puntos(i,1),puntos(i,2)];
                     longitud=size(grupos{grp_pert});
-                    fprintf("Longitud del grupo %d es: %d\n",grp_pert,longitud(2));
+                    fprintf("Longitud del grupo %d es: %d l: %d\n",grp_pert,longitud(2),l);
                 else
                     j = j+1;
                     %grupos{j} = [puntos(1,i),puntos(2,i)];
@@ -70,7 +70,7 @@ function [grp_pert,dist] = Det_Distancias(puntos_x,puntos_y,grupo,j)
 %    med_pts = (puntos_x + puntos_y)/2;
     A=[puntos_x,puntos_y];
     for ind =1:1:j
-        grp_ac=[grupo{ind,:},grupo{ind,:}];
+        grp_ac=[grupo{ind,:}];
         med = mean(grp_ac,2,'omitnan');
         temp = norm(A-med);
         if ind == 1
