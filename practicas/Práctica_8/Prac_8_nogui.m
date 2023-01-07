@@ -3,7 +3,7 @@ clear all
 close all
 
 %Código principal
-%ruta1 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Alemania.jpg";
+%ruta1 = "C:/Users/Johan/Desktop/Parte1.png";
 %ruta2 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/belgica.jpeg";              
 %ruta3 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/colombia.png";                
 %ruta4 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Holanda.jpeg";                
@@ -13,10 +13,10 @@ close all
 %ruta8 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/qatar.png";
 
 Opciones();
-bandera = input('Indique la bandera a utilizar  ');
-no_pts=input('Indique la cantidad de puntos a colocar  ');
+bandera = 1;
+no_pts=300;
 
-Rt_band = ObtenerRuta(bandera);
+Rt_band = "C:/Users/Johan/Desktop/Parte1.png";
 Image_bandera = imread(Rt_band);
 image(Image_bandera);
 hold on
@@ -26,7 +26,7 @@ hold on
 %n=10;
 i=1;
 dims =[1,1];
-while dims(1)<3 || dims(1)>5
+while dims(1)~=4
     T = randi([1,5000],1,1);
     %fprintf("\n----------------------%d---------------T=%d----\n",i,T);
     grupos = CrearGrupos(puntos,no_pts,T);
@@ -113,27 +113,31 @@ function [puntos,info] = Generar_puntos(cantidad,value)
             imshow(Imagen,conv_coord_pix);
             title('Imagen en coordenadas pixelares');
             if(value == 1) 
-                %negro
-                nx=randi([1,4160],1,cantidad);
-                ny=randi([1,830],1,cantidad);                
-                %rojo
-                rx=randi([1,4160],1,cantidad);
-                ry=randi([832,1664],1,cantidad);                
-                %amarillo
-                ax=randi([1,4160],1,cantidad);
-                ay=randi([1665,2496],1,cantidad);
-                d1=impixel(Imagen,nx(1,:),ny(1,:));
-                d2=impixel(Imagen,rx(1,:),ry(1,:));
-                d3=impixel(Imagen,ax(1,:),ay(1,:));
+                %circulo negro
+                cirx=randi([0,220],1,cantidad);
+                ciry=randi([30,143],1,cantidad); 
+                cir2x=randi([385,580],1,cantidad);
+                cir2y=randi([220,340],1,cantidad); 
+                %cuadrado rojo
+                cuax=randi([0,220],1,cantidad);
+                cuay=randi([210,350],1,cantidad);                
+                %cruz amarillo
+                crux=randi([360,600],1,cantidad);
+                cruy=randi([0,145],1,cantidad);
+                d1=impixel(Imagen,cirx(1,:),ciry(1,:));
+                d2=impixel(Imagen,cuax(1,:),cuay(1,:));
+                d3=impixel(Imagen,crux(1,:),cruy(1,:));
+                d4=impixel(Imagen,cir2x(1,:),cir2y(1,:));
                 grid on
                 hold on
-                plot(nx(1,:),ny(1,:),'ob','LineWidth',1,'MarkerSize',10);
-                plot(rx(1,:),ry(1,:),'ok','LineWidth',1,'MarkerSize',10);
-                plot(ax(1,:),ay(1,:),'og','LineWidth',1,'MarkerSize',10);
-                legend('Negro','Rojo','Amarillo')
+                plot(cuax(1,:),cuay(1,:),'ok','LineWidth',1,'MarkerSize',10);
+                plot(crux(1,:),cruy(1,:),'og','LineWidth',1,'MarkerSize',10);
+                plot(cirx(1,:),ciry(1,:),'ob','LineWidth',1,'MarkerSize',10);
+                plot(cir2x(1,:),cir2y(1,:),'ob','LineWidth',1,'MarkerSize',10);
+                legend('Rectangulo','Cruz','Circulo')
                 title('GRAFICA DE 3 CLASES DE OBJETOS SOBRE UNA IMAGEN');                
-                D=[d1,d2,d3];
-                puntos = [nx,rx,ax;ny,ry,ay];
+                D=[d1,d2,d3,d4];
+                puntos = [cuax,crux,cirx,cir2x;cuay,cruy,ciry,cir2y];
                 info = D;
                     
             elseif(value == 2)            
@@ -305,7 +309,7 @@ function [puntos,info] = Generar_puntos(cantidad,value)
 
 function ruta = ObtenerRuta(valor)
     if valor == 1
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Alemania.jpg";
+    ruta = "C:/Users/Johan/Desktop/Parte1.png";
     elseif valor == 2
     ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/belgica.jpeg";              
     elseif valor == 3
@@ -325,7 +329,7 @@ function ruta = ObtenerRuta(valor)
 end
 
 function menu = Opciones()
-    fprintf("1.-Bandera alemana \n2.- Bandera de Belgica\n3.- Bandera colombiana\n 4.-Bandera Holandesa\n5.-Bandera Italiana\n");
+    fprintf("1.-Figura parte 1 \n2.- Bandera de Belgica\n3.- Bandera colombiana\n 4.-Bandera Holandesa\n5.-Bandera Italiana\n");
     fprintf("6.-Bandera Irlandesa \n7.- Bandera de Luxemburgo\n8.- Bandera Qatar\n");
     menu = 1;
 end

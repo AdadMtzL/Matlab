@@ -6,7 +6,7 @@ warning off all %evita llamadas de atención
 
 %variables
 imagenes = [""];
-nombre = "Bases Sossa\IMAG";
+nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 extension = ".BMP";
 numero = "";
 
