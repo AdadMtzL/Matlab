@@ -10,7 +10,13 @@ warning off all %evita llamadas de atención
 %variables
 imagenes = [""];
 %-------Cambiar ruta absoluta
-nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+try %rutas johan
+    nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+catch except
+    print(except)
+end
 nombreInicialArchivo = "IMAG";
 extension = ".BMP";
 numero = "";
@@ -76,7 +82,23 @@ for i = 1: +1:contador-1
 end
 %Escritura de los valores en tabla (Solo para muestra, no es necesaria la extraccion de los datos)
 T = table(nombreObjeto,perimetro,area,circularidad,convexArea);
-writetable(T,'tablaNoIndexada.txt');
+
+%Detección de la existencia de un conjunto de datos previo
+try 
+    delete("tablaNoIndexada.xlsx");
+catch   exception
+    
+end
+writetable(T,'tablaNoIndexada.xlsx',"AutoFitWidth",true);
 %----------Visualizacion de tabla, quitar comentario para desplegar-------------
-%type tablaNoIndexada.txt;
+%Area de datos B2:E686
+%B1 -> Perimtetro
+%C1 -> Area
+%D1 -> Circularidad
+%E1 -> ConvexArea
+%type tablaNoIndexada.xlsx;
+
+%formas de obtener la info
+%info = readmatrix('tablaNoIndexada.xlsx','Range','B2:E686');
+info = [perimetro,area,circularidad,convexArea];
 

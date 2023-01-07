@@ -10,7 +10,13 @@ warning off all %evita llamadas de atención
 %variables
 imagenes = [""];
 %-------Cambiar ruta absoluta
-nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+try %rutas johan
+    nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+catch except
+    print(except)
+end
 nombreInicialArchivo = "IMAG";
 extension = ".BMP";
 numero = "";
@@ -64,17 +70,26 @@ for i = 1: +1:contador-1
         nombre = "obj";
         objetosGuardados = objetosGuardados + 1;
         nombre = strcat(nombre,num2str(j),nombreInicialArchivo,numero,num2str(i),extension);
-        if i>98 
-            i = i-6; 
-        end
-        nombreObjeto(objetosGuardados) = nombre;
-        perimetro(objetosGuardados) = stats(j).Perimeter;
-        area(objetosGuardados) = stats(j).Area;
-        circularidad(objetosGuardados) = stats(j).Circularity;
-        convexArea(objetosGuardados) = stats(j).ConvexArea;
+        nombreObjeto(objetosGuardados,1) = nombre;
+        perimetro(objetosGuardados,1) = stats(j).Perimeter;
+        area(objetosGuardados,1) = stats(j).Area;
+        circularidad(objetosGuardados,1) = stats(j).Circularity;
+        convexArea(objetosGuardados,1) = stats(j).ConvexArea;
+    end
+    if i>98 
+        i = i-6; 
     end
 end
 %Escritura de los valores en tabla (Solo para muestra, no es necesaria la extraccion de los datos)
 T = table(nombreObjeto,perimetro,area,circularidad,convexArea);
-writeT
+try 
+writetable(T,'tablaNoIndexada.xlsx',"AutoFitWidth",true);
+%----------Visualizacion de tabla, quitar comentario para desplegar-------------
+%Area de datos B2:E686
+%B1 -> Perimtetro
+%C1 -> Area
+%D1 -> Circularidad
+%E1 -> ConvexArea
+%type tablaNoIndexada.xlsx;
+info = readmatrix('tablaNoIndexada.xlsx','Range','B2:E686');
 
