@@ -77,7 +77,6 @@ end
 %Escritura de los valores en tabla (Solo para muestra, no es necesaria la extraccion de los datos)
 T = table(nombreObjeto,perimetro,area,circularidad,convexArea);
 writetable(T,'tablaNoIndexada.txt');
-%----------Visualizacion de tabla, comentar para evitar exageracion de
-%informacion
-type tablaNoIndexada.txt;
+%----------Visualizacion de tabla, quitar comentario para desplegar-------------
+%type tablaNoIndexada.txt;
 
