@@ -12,7 +12,7 @@ imagenes = [""];
 %-------Cambiar ruta absoluta
 try %rutas johan
     nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
-    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 catch except
     print(except)
@@ -101,4 +101,15 @@ writetable(T,'tablaNoIndexada.xlsx',"AutoFitWidth",true);
 %formas de obtener la info
 %info = readmatrix('tablaNoIndexada.xlsx','Range','B2:E686');
 info = [perimetro,area,circularidad,convexArea];
+
+
+
+%----------Funcion para metodo probabilístico-----%
+
+
+
+
+%----------Función para perceptron----------------%
+
+
 
