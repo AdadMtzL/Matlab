@@ -20,8 +20,12 @@ nombreInicialArchivo = "IMAG";
 extension = ".BMP";
 totalImagenes = 120;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
-
-
+[clase,x,y,z] = crear_clases(info);
+temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))]
+temp(1,1)
+temp(2,1)
+temp(3,1)
+%corregir la forma de la que llega la info de cada clase
 
 %%Funciones--------------------------------------------------------------------%%
 %---------Funcuión para la extracción de la información-------%
@@ -108,8 +112,110 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
     return
 end
 
+%---------Función para la creación de clases------%
+function [clase,x,y,z] = crear_clases(info)
+
+    clase_x = {1,5};
+    clase_y = {1,5};
+    clase_z = {1,5};
+    
+    %creacion de clases
+    contador_obj = 1;
+    no_ind = 1;
+    repeticiones = 1;
+    while repeticiones ~= 6
+        for cont = contador_obj:1:contador_obj+14
+            vx{no_ind} = info(cont,2);
+            no_ind = no_ind+1;
+        end
+        no_ind = 1;
+        for cont = contador_obj:1:contador_obj+14
+            vy{no_ind} = info(cont,3);
+            no_ind = no_ind+1;
+        end
+        no_ind = 1;
+        for cont = contador_obj:1:contador_obj+14
+            vz{no_ind} = info(cont,4);
+            no_ind = no_ind+1;
+        end
+        no_ind = 1;
+        clase_x{repeticiones}=vx;
+        clase_y{repeticiones}=vy;
+        clase_z{repeticiones}=vz;
+        contador_obj = contador_obj+15;
+        repeticiones = repeticiones +1;
+    end
+    
+    x= clase_x;;
+    y = clase_y;
+    z= clase_z;
+    cls = cell(5,3);
+    for ind = 1:1:5
+        conv_x = cell2mat(x{ind});
+        conv_y = cell2mat(y{ind});
+        conv_z = cell2mat(z{ind});
+        cls{ind,1}=conv_x;
+        cls{ind,2}=conv_y;
+        cls{ind,3}=conv_z;
+    end
+    clase= cls;
+    return
+end
+
 %----------Funcion para metodo probabilístico-----%
-function probabilistico = prob()
+function probabilidad_clase = prob(clases,info)
+%nota importante, para entrenamiento(clases de objetos) tenemos 15 de cada
+%clase (sumatoria de 1 a 5), por ende los objetos on los 1 a 15
+%clase 1 1-15
+%clase 2 16-30
+%clase 3 31-45
+%clase 4 46-60
+%clase 5 61-75
+%Estructura info cruda: perimetro,area,circularidad,convexarea
+% se retorna como cell array, para que sea más facil su impresion con
+% el formato temp = [cell2mat(clase(1,i));cell2mat(clase(1,i));cell2mat(clase(1,i))]
+%clasificación
+        sup={1,cant_clases};
+        inf={1,cant_clases};
+        probabilidades = {1,cant_clases};
+        Probas = {1,cant_clases};
+        distancias_calculadas_mahalahobis={1,cant_clases};
+        sumatoria=0;
+
+        for elem = 1:1:cant_clases
+            clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
+            media=mean(clas_ac,2);
+            matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
+            matriz_covarianza_inversa=inv(matriz_covarianza);
+            diferenia_vector_clase=vector-media;
+            diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
+            
+            distancias_calculadas_mahalahobis{elem}=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
+            
+            sup{elem}=exp(-0.5*(distancias_calculadas_mahalahobis{elem}));
+            inf{elem}=(2*pi)*det(matriz_covarianza)^(0.5);
+
+            probabilidades{elem}=sup{elem}/inf{elem};
+
+        end
+
+        for elem = 1:1:cant_clases
+            sumatoria = sumatoria+probabilidades{elem};
+        end
+        
+        for elem = 1:1:cant_clases
+            Probas{elem}=(probabilidades{elem}/sumatoria);
+        end
+        
+        probas=cell2mat(Probas)
+        Max_prob=max(max(probas));
+        for ind =1:1:cant_clases
+            if Max_prob==probas(ind)
+                clase_pert=ind;
+            end
+        end
+
+
 
 end
 
