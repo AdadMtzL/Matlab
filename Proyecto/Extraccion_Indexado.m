@@ -21,11 +21,11 @@ extension = ".BMP";
 totalImagenes = 120;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
-temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))]
-temp(1,1)
-temp(2,1)
-temp(3,1)
-%corregir la forma de la que llega la info de cada clase
+
+
+%A = [1,4,7,8;4,2,3,5];
+%mean(A,2)
+
 
 %%Funciones--------------------------------------------------------------------%%
 %---------Funcuión para la extracción de la información-------%
@@ -218,11 +218,36 @@ function probabilidad_clase = prob(clases,info)
 
 
 end
-
+    temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
+    mean_x = mean(temp(1,:));
+    mean_y = mean(temp(2,:));
+    mean_z = mean(temp(3,:));
+    media = [mean_x;mean_y;mean_z]
 
 
 %----------Función para perceptron----------------%
-function perceptron = perc()
+function Euclidean = ecd()
+    %d = sqrt((xi-xd)^2 + (yi - yd)^2 + (zi - yd)^2)
+    %xi,yi,zi media clase -> mean(clase(dim,:))
+    %mean_x = mean(temp(1,:))
+    %mean_y = mean(temp(2,:))
+    %mean_z = mean(temp(3,:))
+    %media = [mean_x;mean_y;mean_z];
+    dist_calc =100000000;
+    cls_pert = 0;
+    for ind = 1:1:5
+        temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
+        mean_x = mean(temp(1,:));
+        mean_y = mean(temp(2,:));
+        mean_z = mean(temp(3,:));
+%        media = [mean_x;mean_y;mean_z]
+        dist_calc = sqrt(pow2(mean_x - X_desc)+pow2(mean_y - Y_desc)+pow2(mean_z - Z_desc));
+        if dist_calc > dist_temp
+            dist_calc = dist_temp;
+            cls_pert = ind;
+        end
+    end
+    
 
 end
 

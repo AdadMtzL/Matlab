@@ -23,6 +23,10 @@ info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
 
 
+%A = [1,4,7,8;4,2,3,5];
+%mean(A,2)
+
+
 %%Funciones--------------------------------------------------------------------%%
 %---------Funcuión para la extracción de la información-------%
 function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
@@ -146,7 +150,6 @@ function [clase,x,y,z] = crear_clases(info)
     y = clase_y;
     z= clase_z;
     cls = cell(5,3);
-    %lo regresa como un array unitario
     for ind = 1:1:5
         conv_x = cell2mat(x{ind});
         conv_y = cell2mat(y{ind});
@@ -156,7 +159,6 @@ function [clase,x,y,z] = crear_clases(info)
         cls{ind,3}=conv_z;
     end
     clase= cls;
-    
     return
 end
 
@@ -170,7 +172,8 @@ function probabilidad_clase = prob(clases,info)
 %clase 4 46-60
 %clase 5 61-75
 %Estructura info cruda: perimetro,area,circularidad,convexarea
-
+% se retorna como cell array, para que sea más facil su impresion con
+% el formato temp = [cell2mat(clase(1,i));cell2mat(clase(1,i));cell2mat(clase(1,i))]
 %clasificación
         sup={1,cant_clases};
         inf={1,cant_clases};
@@ -215,11 +218,34 @@ function probabilidad_clase = prob(clases,info)
 
 
 end
-
+    temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
+    mean_x = mean(temp(1,:));
+    mean_y = mean(temp(2,:));
+    mean_z = mean(temp(3,:));
+    media = [mean_x;mean_y;mean_z]
 
 
 %----------Función para perceptron----------------%
-function perceptron = perc()
+function Euclidean = ecd()
+    %d = sqrt((xi-xd)^2 + (yi - yd)^2 + (zi - yd)^2)
+    %xi,yi,zi media clase -> mean(clase(dim,:))
+    %mean_x = mean(temp(1,:))
+    %mean_y = mean(temp(2,:))
+    %mean_z = mean(temp(3,:))
+    %media = [mean_x;mean_y;mean_z];
+    dist_calc =100000000;
+    for ind = 1:1:5
+        temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
+        mean_x = mean(temp(1,:));
+        mean_y = mean(temp(2,:));
+        mean_z = mean(temp(3,:));
+        media = [mean_x;mean_y;mean_z]
+        dist_calc = sqrt(pow2(mean_x - X_desc)+pow2(mean_y - X_desc)+pow2(mean_x - X_desc)+)
+        if dist_calc > dist_temp
+            dist_calc = dist_temp;
+        end
+    end
+    
 
 end
 
