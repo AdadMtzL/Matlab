@@ -12,11 +12,13 @@ warning off all %evita llamadas de atención
 try %rutas johan
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
     nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\base_2\bmp\IMG";
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 catch except
     print(except)
 end
 nombreInicialArchivo = "IMAG";
+%nombreInicialArchivo = "IMG";
 extension = ".BMP";
 totalImagenes = 120;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
@@ -175,6 +177,13 @@ function probabilidad_clase = prob(clases,info)
 % se retorna como cell array, para que sea más facil su impresion con
 % el formato temp = [cell2mat(clase(1,i));cell2mat(clase(1,i));cell2mat(clase(1,i))]
 %clasificación
+
+    temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
+    mean_x = mean(temp(1,:));
+    mean_y = mean(temp(2,:));
+    mean_z = mean(temp(3,:));
+    media = [mean_x;mean_y;mean_z]
+
         sup={1,cant_clases};
         inf={1,cant_clases};
         probabilidades = {1,cant_clases};
@@ -218,12 +227,7 @@ function probabilidad_clase = prob(clases,info)
 
 
 end
-    temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
-    mean_x = mean(temp(1,:));
-    mean_y = mean(temp(2,:));
-    mean_z = mean(temp(3,:));
-    media = [mean_x;mean_y;mean_z]
-
+    
 
 %----------Función para perceptron----------------%
 function Euclidean = ecd()
