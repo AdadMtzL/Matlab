@@ -24,7 +24,8 @@ totalImagenes = 120;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
 index_info = inx(clase);
-index_info
+ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG061.bmp";
+ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
 
@@ -231,18 +232,25 @@ end
 
 %----------Función para euclidiana----------------%
 function Euclidean = ecd(clase,ruta_imagen)
-    dist_calc =100000000;
     cls_pert = 0;
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
     imagen = imbinarize(imagen);
     imagen = bwareaopen(imagen,30);
     imagen = imfill(imagen,'holes');
+    imshow(imagen);
     stats = regionprops(imagen,"Area","Centroid","Circularity","ConvexArea");
-    for j =1 : length(stats)
+
+    datos = split(ruta_imagen,'\');
+    nombre = split(datos(length(datos)),'.');
+    nombreInicialArchivo = nombre(1);
+    extension = nombre(2);
+    numero = "";
+    %length(stats)
+    for j = 1:1:length(stats)
         nombre = "obj";
         objetosGuardados = objetosGuardados + 1;
-        nombre = strcat(nombre,num2str(j),nombreInicialArchivo,numero,num2str(1),extension);
+        nombre = strcat(nombre,num2str(j),nombreInicialArchivo,numero,extension);
         nombreObjeto(objetosGuardados,1) = nombre;
         area(objetosGuardados,1) = stats(j).Area;
         circularidad(objetosGuardados,1) = stats(j).Circularity;
@@ -250,18 +258,27 @@ function Euclidean = ecd(clase,ruta_imagen)
         X_desc = stats(j).Area;
         Y_desc = stats(j).Circularity;
         Z_desc = stats(j).ConvexArea;
-        ind = 1;
-        while ind ~=5
+        for ind = 1:1:5
             temp = [cell2mat(clase(ind,1));cell2mat(clase(ind,2));cell2mat(clase(ind,3))];
             mean_x = mean(temp(1,:));
             mean_y = mean(temp(2,:));
             mean_z = mean(temp(3,:));
-            dist_calc = sqrt(pow2(mean_x - X_desc)+pow2(mean_y - Y_desc)+pow2(mean_z - Z_desc));
-            if dist_calc > dist_temp
-                dist_calc = dist_temp;
+            Difx=mean_x - X_desc;
+            Dify=mean_y - Y_desc;
+            Difz=mean_z - Z_desc;
+            pdifx=Difx*Difx;
+            pdify=Dify*Dify;
+            pdifz=Difz*Difz;
+            dist_calc = sqrt(pdifx+pdify+pdifz);
+            if (ind ==1)
+                dist_min = dist_calc;
                 cls_pert = ind;
+            else
+                if(dist_calc<dist_min)
+                    dist_min=dist_calc;
+                    cls_pert = ind;
+                end
             end
-            ind = ind+1;
         end
         if cls_pert == 1
             nombre_clase = "Rondana";
@@ -274,7 +291,15 @@ function Euclidean = ecd(clase,ruta_imagen)
         elseif cls_pert == 5
             nombre_clase = "Cola de pato";
         end
-        fpritnf("El objeto "+nombreObjeto+" tiene una dustancia de  ",dist_calc," y pertenece a la clase "+nombre_clase);
+        try
+            fprintf("El objeto "+nombreObjeto(j,1));
+            fprintf(" tiene una distancia de "+dist_calc+"\n");
+            texto = strcat(" y pertenece a la clase ",nombre_clase);
+            fprintf(texto);
+            fprintf("\n");
+        catch exception
+            
+        end
     end
 end
 
