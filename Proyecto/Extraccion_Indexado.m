@@ -178,7 +178,7 @@ function probabilidad_clase = prob(clases,ruta_imagen)
 % el formato temp = [cell2mat(clase(1,i));cell2mat(clase(1,i));cell2mat(clase(1,i))]
 %clasificación
 
-    temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
+    temp = [cell2mat(clase(ind,1));cell2mat(clase(ind,2));cell2mat(clase(ind,3))];
     mean_x = mean(temp(1,:));
     mean_y = mean(temp(2,:));
     mean_z = mean(temp(3,:));
@@ -230,29 +230,52 @@ end
     
 
 %----------Función para euclidiana----------------%
-function Euclidean = ecd(clases,ruta_imagen)
-    %d = sqrt((xi-xd)^2 + (yi - yd)^2 + (zi - yd)^2)
-    %xi,yi,zi media clase -> mean(clase(dim,:))
-    %mean_x = mean(temp(1,:))
-    %mean_y = mean(temp(2,:))
-    %mean_z = mean(temp(3,:))
-    %media = [mean_x;mean_y;mean_z];
+function Euclidean = ecd(clase,ruta_imagen)
     dist_calc =100000000;
     cls_pert = 0;
-    for ind = 1:1:5
-        temp = [cell2mat(clase(1,1));cell2mat(clase(2,1));cell2mat(clase(3,1))];
-        mean_x = mean(temp(1,:));
-        mean_y = mean(temp(2,:));
-        mean_z = mean(temp(3,:));
-%        media = [mean_x;mean_y;mean_z]
-        dist_calc = sqrt(pow2(mean_x - X_desc)+pow2(mean_y - Y_desc)+pow2(mean_z - Z_desc));
-        if dist_calc > dist_temp
-            dist_calc = dist_temp;
-            cls_pert = ind;
+    objetosGuardados = 0;
+    imagen = imread(ruta_imagen);
+    imagen = imbinarize(imagen);
+    imagen = bwareaopen(imagen,30);
+    imagen = imfill(imagen,'holes');
+    stats = regionprops(imagen,"Area","Centroid","Circularity","ConvexArea");
+    for j =1 : length(stats)
+        nombre = "obj";
+        objetosGuardados = objetosGuardados + 1;
+        nombre = strcat(nombre,num2str(j),nombreInicialArchivo,numero,num2str(1),extension);
+        nombreObjeto(objetosGuardados,1) = nombre;
+        area(objetosGuardados,1) = stats(j).Area;
+        circularidad(objetosGuardados,1) = stats(j).Circularity;
+        convexArea(objetosGuardados,1) = stats(j).ConvexArea;
+        X_desc = stats(j).Area;
+        Y_desc = stats(j).Circularity;
+        Z_desc = stats(j).ConvexArea;
+        ind = 1;
+        while ind ~=5
+            temp = [cell2mat(clase(ind,1));cell2mat(clase(ind,2));cell2mat(clase(ind,3))];
+            mean_x = mean(temp(1,:));
+            mean_y = mean(temp(2,:));
+            mean_z = mean(temp(3,:));
+            dist_calc = sqrt(pow2(mean_x - X_desc)+pow2(mean_y - Y_desc)+pow2(mean_z - Z_desc));
+            if dist_calc > dist_temp
+                dist_calc = dist_temp;
+                cls_pert = ind;
+            end
+            ind = ind+1;
         end
+        if cls_pert == 1
+            nombre_clase = "Rondana";
+        elseif cls_pert == 2
+            nombre_clase = "Tornilllo";
+        elseif cls_pert == 3
+            nombre_clase = "Armella";
+        elseif cls_pert == 4
+            nombre_clase = "Arandela";
+        elseif cls_pert == 5
+            nombre_clase = "Cola de pato";
+        end
+        fpritnf("El objeto "+nombreObjeto+" tiene una dustancia de  ",dist_calc," y pertenece a la clase "+nombre_clase);
     end
-    
-
 end
 
 %---------Función para obtener la base indexada---%
