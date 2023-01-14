@@ -10,8 +10,8 @@ warning off all %evita llamadas de atención
 %constantes
 %-------Cambiar ruta absoluta
 try %rutas johan
-    %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
-    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
+    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
     %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\base_2\bmp\IMG";
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 catch except
@@ -24,7 +24,8 @@ totalImagenes = 120;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
 index_info = inx(clase);
-ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
+%ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
+ruta_imagen = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
 ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
@@ -290,9 +291,9 @@ function Euclidean = ecd(clase,ruta_imagen)
         elseif cls_pert == 2
             nombre_clase = "Tornilllo";
         elseif cls_pert == 3
-            nombre_clase = "Armella";
+            nombre_clase = "Alcayata";
         elseif cls_pert == 4
-            nombre_clase = "Arandela";
+            nombre_clase = "Armella";
         elseif cls_pert == 5
             nombre_clase = "Cola de pato";
         end
@@ -320,7 +321,7 @@ function Datos_indexados = inx(clase)
     Data_carac{1,2} = "Area";
     Data_carac{1,3} = "Circularidad";
     Data_carac{1,4} = "Area convexa";
-    nombre = ["Rondana","Tornillo","Armella","Arandela","Cola de pato"];
+    nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato"];
     for no_clase = 1:1:5
         temp = [cell2mat(clase(no_clase,1));cell2mat(clase(no_clase,2));cell2mat(clase(no_clase,3))];
         Area = mean(temp(1,:));
