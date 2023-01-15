@@ -9,13 +9,14 @@ warning off all %evita llamadas de atención
 %
 %constantes
 %-------Cambiar ruta absoluta
-try %rutas johan
+usuario = input("Indique quien esta haciendo uso del software en este monento \n1.-Johan\n2.-Adad\n3.-Chema\n");
+if usuario ==1
     nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
-    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+elseif usuario ==2
+    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
     %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\base_2\bmp\IMG";
+elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
-catch except
-    print(except)
 end
 nombreInicialArchivo = "IMAG";
 %nombreInicialArchivo = "IMG";
