@@ -17,10 +17,10 @@ if (usuario == 1)
         end
 elseif (usuario == 2)
         %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
-        nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\bmp_correcta\IMG";
+        nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".bmp";
-        totalImagenes = 10;
+        totalImagenes = 34;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
         for imag = 1:1:length(nombres)
             ver_imagenes(nombres(imag));
