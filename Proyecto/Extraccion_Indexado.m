@@ -14,19 +14,19 @@ if usuario ==1
     nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 elseif usuario ==2
     %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
-    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\base_2\bmp\IMG";
+    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
-nombreInicialArchivo = "IMAG";
-%nombreInicialArchivo = "IMG";
-extension = ".BMP";
-totalImagenes = 120;
+%nombreInicialArchivo = "IMAG";
+nombreInicialArchivo = "IMG";
+extension = ".bmp";
+totalImagenes = 25;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
 index_info = inx(clase);
 %ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
-ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\bmp\IMG009.bmp";
+ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG039.bmp";
 ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
@@ -60,10 +60,11 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
             contador = contador + 1;
         end
     end
+    contador
     
     %Guardamos cada caracteristica en un arreglo con nombre y numero de objeto
     objetosGuardados = 0;
-    for i = 1: +1:contador-1
+    for i = 1:1:contador-1
         if i<10
             numero = "00";
         elseif i<99
@@ -72,14 +73,12 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
             numero = "";
         end
         imagen = imread(imagenes(i));
-        if i>98 
-            i = i+6; 
-        end
         imagen = imbinarize(imagen);
         imagen = bwareaopen(imagen,30);
+        i
         imagen = imfill(imagen,'holes');
         stats = regionprops(imagen,"Perimeter","Area","Centroid","Circularity","ConvexArea");
-        for j =1 : length(stats)
+        for j =1 :1: length(stats)
             nombre = "obj";
             objetosGuardados = objetosGuardados + 1;
             nombre = strcat(nombre,num2str(j),nombreInicialArchivo,numero,num2str(i),extension);
@@ -88,9 +87,6 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
             area(objetosGuardados,1) = stats(j).Area;
             circularidad(objetosGuardados,1) = stats(j).Circularity;
             convexArea(objetosGuardados,1) = stats(j).ConvexArea;
-        end
-        if i>98 
-            i = i-6; 
         end
     end
     %Escritura de los valores en tabla (Solo para muestra, no es necesaria la extraccion de los datos)
