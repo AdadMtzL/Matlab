@@ -9,7 +9,22 @@ if (usuario == 1)
         nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".BMP";
-        totalImagenes = 20;
+        %nombreFinal = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG041.bmp";
+        %imagen = imread(nombreFinal);
+        %imagen = im2gray(imagen);
+        %imagen = imbinarize(imagen);
+        %figure(1)
+        %imagen = bwareaopen(imagen,30);
+        %imagen = imfill(imagen,'holes');
+        %imshow(imagen);
+        %stats = regionprops(imagen,"Perimeter","Area","Centroid","BoundingBox","Circularity",'Extrema',"ConvexArea");
+        %for i =1 : length(stats)
+        %    x = stats(i).BoundingBox;
+        %    rectangle("Position",[x(1),x(2),x(3),x(4)],"EdgeColor","r","LineWidth",2);
+        %    text(stats(i).Centroid(1),stats(i).Centroid(2),num2str(i),"Color","g");
+        %end
+
+        totalImagenes = 39;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
         for imag = 1:1:length(nombres)
             ver_imagenes(nombres(imag));
@@ -45,8 +60,6 @@ end
 %[IND,map] = rgb2ind(imagen_jpg,64);
 %imagesc(IND)
 %colormap(map)
-
-
 
 function get_rts = gtr(nombreInicialArchivo,extension,totalImagenes,nombre)
     numero = "";
