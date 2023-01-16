@@ -6,10 +6,10 @@ warning off all %evita llamadas de atención
 usuario = input("Indique quien esta haciendo uso del software en este monento \n1.-Johan\n2.-Adad\n3.-Chema\n");
 
 if (usuario == 1)
-        nombre = "C:\Users\Johan\Documents\ImagenesPrueba\IMG";
+        nombre = "C:\Users\Johan\Documents\ImagenesPrueba\";
         nombreInicialArchivo = "IMG";
         extension = ".BMP";
-        totalImagenes = 20;
+        totalImagenes = 1;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
         for imag = 1:1:length(nombres)
             ver_imagenes(nombres(imag));
@@ -71,7 +71,6 @@ end
 function imgs = ver_imagenes(ruta_imagen)
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
-    imagen = im2gray(imagen);
     imagen = imbinarize(imagen);
     imagen = bwareaopen(imagen,30);
     imagen = imfill(imagen,'holes');
