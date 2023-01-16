@@ -26,7 +26,7 @@ info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
 index_info = inx(clase);
 %ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
-ruta_imagen = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
+ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\bmp\IMG009.bmp";
 ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
@@ -242,12 +242,7 @@ function Euclidean = ecd(clase,ruta_imagen)
     imagen = imfill(imagen,'holes');
     imshow(imagen);
     stats = regionprops(imagen,"Area","Centroid","Circularity","ConvexArea");
-    stats_1 = regionprops(imagen,"Perimeter","Area","Centroid","BoundingBox","Circularity",'Extrema',"ConvexArea");
-    for i =1:1:length(stats)
-            ttmmp = stats_1(i).BoundingBox;
-            rectangle("Position",[ttmmp(1),ttmmp(2),ttmmp(3),ttmmp(4)],"EdgeColor","r","LineWidth",2);
-            text(stats(i).Centroid(1),stats(i).Centroid(2),num2str(i),"Color","g");
-    end
+
     datos = split(ruta_imagen,'\');
     nombre = split(datos(length(datos)),'.');
     nombreInicialArchivo = nombre(1);
@@ -304,11 +299,18 @@ function Euclidean = ecd(clase,ruta_imagen)
             texto = strcat(" y pertenece a la clase ",nombre_clase);
             fprintf(texto);
             fprintf("\n");
+            stats_1 = regionprops(imagen,"Perimeter","Area","Centroid","BoundingBox","Circularity",'Extrema',"ConvexArea");
+            for i =1:1:length(stats)
+                ttmmp = stats_1(i).BoundingBox;
+                rectangle("Position",[ttmmp(1),ttmmp(2),ttmmp(3),ttmmp(4)],"EdgeColor","r","LineWidth",2);
+                text(stats(i).Centroid(1),stats(i).Centroid(2),strcat("Objeto ",num2str(i)," ",nombre_clase),"Color","g");
+            end
         catch exception
             
         end
     end
 end
+
 
 %---------Función para obtener la base indexada---%
 function Datos_indexados = inx(clase)
