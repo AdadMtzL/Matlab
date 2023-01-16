@@ -9,27 +9,27 @@ if (usuario == 1)
         nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".BMP";
-        %nombreFinal = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG041.bmp";
-        %imagen = imread(nombreFinal);
-        %imagen = im2gray(imagen);
-        %imagen = imbinarize(imagen);
-        %figure(1)
-        %imagen = bwareaopen(imagen,30);
-        %imagen = imfill(imagen,'holes');
-        %imshow(imagen);
-        %stats = regionprops(imagen,"Perimeter","Area","Centroid","BoundingBox","Circularity",'Extrema',"ConvexArea");
-        %for i =1 : length(stats)
-        %    x = stats(i).BoundingBox;
-        %    rectangle("Position",[x(1),x(2),x(3),x(4)],"EdgeColor","r","LineWidth",2);
-        %    text(stats(i).Centroid(1),stats(i).Centroid(2),num2str(i),"Color","g");
-        %end
-
-        totalImagenes = 39;
-        nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
-        for imag = 1:1:length(nombres)
-            ver_imagenes(nombres(imag));
-            pausa = input("Cotinuar?  ");
+        nombreFinal = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG031.bmp";
+        imagen = imread(nombreFinal);
+        imagen = im2gray(imagen);
+        imagen = imbinarize(imagen);
+        figure(1)
+        imagen = bwareaopen(imagen,30);
+        imagen = imfill(imagen,'holes');
+        imshow(imagen);
+        stats = regionprops(imagen,"Perimeter","Area","Centroid","BoundingBox","Circularity",'Extrema',"ConvexArea");
+        for i =1 : length(stats)
+            x = stats(i).BoundingBox;
+            rectangle("Position",[x(1),x(2),x(3),x(4)],"EdgeColor","r","LineWidth",2);
+            text(stats(i).Centroid(1),stats(i).Centroid(2),num2str(i),"Color","g");
         end
+
+        %totalImagenes = 39;
+        %nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
+        %for imag = 1:1:length(nombres)
+        %    ver_imagenes(nombres(imag));
+        %    pausa = input("Cotinuar?  ");
+        %end
 elseif (usuario == 2)
         %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
         nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
