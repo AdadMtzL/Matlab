@@ -13,21 +13,24 @@ usuario = input("Indique quien esta haciendo uso del software en este monento \n
 if usuario ==1
     nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 elseif usuario ==2
-    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
-    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
+    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
 %nombreInicialArchivo = "IMAG";
-nombreInicialArchivo = "IMAG";
+nombreInicialArchivo = "IMG";
 extension = ".bmp";
-totalImagenes = 40;
+totalImagenes = 25;
+fprintf("Generacion no indexada \n");
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
+fprintf("Creacion de clases \n");
 [clase,x,y,z] = crear_clases(info);
+fprintf("Generacion de la indexada \n");
 index_info = inx(clase);
 %ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
-ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG036.bmp";
-ecd(clase,ruta_imagen);
+%ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG036.bmp";
+%ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
 
@@ -72,6 +75,7 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
             numero = "";
         end
         imagen = imread(imagenes(i));
+        imagen = im2gray(imagen);
         imagen = imbinarize(imagen);
         imagen = bwareaopen(imagen,30);
         imagen = imfill(imagen,'holes');
@@ -122,7 +126,7 @@ function [clase,x,y,z] = crear_clases(info)
     contador_obj = 1;
     no_ind = 1;
     repeticiones = 1;
-    while repeticiones ~= 6
+    while repeticiones ~= 5
         for cont = contador_obj:1:contador_obj+14
             vx{no_ind} = info(cont,2);
             no_ind = no_ind+1;
@@ -141,7 +145,7 @@ function [clase,x,y,z] = crear_clases(info)
         clase_x{repeticiones}=vx;
         clase_y{repeticiones}=vy;
         clase_z{repeticiones}=vz;
-        contador_obj = contador_obj+15;
+        contador_obj = contador_obj+14;
         repeticiones = repeticiones +1;
     end
     
@@ -149,7 +153,7 @@ function [clase,x,y,z] = crear_clases(info)
     y = clase_y;
     z= clase_z;
     cls = cell(5,3);
-    for ind = 1:1:5
+    for ind = 1:1:4
         conv_x = cell2mat(x{ind});
         conv_y = cell2mat(y{ind});
         conv_z = cell2mat(z{ind});
@@ -160,9 +164,6 @@ function [clase,x,y,z] = crear_clases(info)
     clase= cls;
     return
 end
-
-%----------Funcion para metodo probabilístico-----%
-function probabilidad_clase = prob(clases,ruta_imagen)
 %nota importante, para entrenamiento(clases de objetos) tenemos 15 de cada
 %clase (sumatoria de 1 a 5), por ende los objetos on los 1 a 15
 %clase 1 1-15
@@ -173,57 +174,7 @@ function probabilidad_clase = prob(clases,ruta_imagen)
 %Estructura info cruda: perimetro,area,circularidad,convexarea
 % se retorna como cell array, para que sea más facil su impresion con
 % el formato temp = [cell2mat(clase(1,i));cell2mat(clase(1,i));cell2mat(clase(1,i))]
-%clasificación
 
-    temp = [cell2mat(clase(ind,1));cell2mat(clase(ind,2));cell2mat(clase(ind,3))];
-    mean_x = mean(temp(1,:));
-    mean_y = mean(temp(2,:));
-    mean_z = mean(temp(3,:));
-    media = [mean_x;mean_y;mean_z]
-
-        sup={1,cant_clases};
-        inf={1,cant_clases};
-        probabilidades = {1,cant_clases};
-        Probas = {1,cant_clases};
-        distancias_calculadas_mahalahobis={1,cant_clases};
-        sumatoria=0;
-
-        for elem = 1:1:cant_clases
-            clas_ac=[cell2mat(tmp2(1,elem));cell2mat(tmp2(2,elem))];
-            media=mean(clas_ac,2);
-            matriz_covarianza=(clas_ac-media)*transpose((clas_ac-media));
-            matriz_covarianza_inversa=inv(matriz_covarianza);
-            diferenia_vector_clase=vector-media;
-            diferenia_vector_clase_transpuesta=transpose(diferenia_vector_clase);
-            
-            distancias_calculadas_mahalahobis{elem}=diferenia_vector_clase_transpuesta*matriz_covarianza_inversa*diferenia_vector_clase;
-            
-            sup{elem}=exp(-0.5*(distancias_calculadas_mahalahobis{elem}));
-            inf{elem}=(2*pi)*det(matriz_covarianza)^(0.5);
-
-            probabilidades{elem}=sup{elem}/inf{elem};
-
-        end
-
-        for elem = 1:1:cant_clases
-            sumatoria = sumatoria+probabilidades{elem};
-        end
-        
-        for elem = 1:1:cant_clases
-            Probas{elem}=(probabilidades{elem}/sumatoria);
-        end
-        
-        probas=cell2mat(Probas)
-        Max_prob=max(max(probas));
-        for ind =1:1:cant_clases
-            if Max_prob==probas(ind)
-                clase_pert=ind;
-            end
-        end
-
-
-
-end
     
 
 %----------Función para euclidiana----------------%
@@ -306,7 +257,7 @@ function Euclidean = ecd(clase,ruta_imagen)
 end
 
 
-%---------Función para obtener la base indexada---%
+%---------Función para obtener la base indexada cambiar a 5 en le for---%
 function Datos_indexados = inx(clase)
     try 
         delete("tablaIndexada.xlsx");
@@ -319,7 +270,8 @@ function Datos_indexados = inx(clase)
     Data_carac{1,3} = "Circularidad";
     Data_carac{1,4} = "Area convexa";
     nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato"];
-    for no_clase = 1:1:5
+    %for no_clase = 1:1:5
+    for no_clase = 1:1:4
         temp = [cell2mat(clase(no_clase,1));cell2mat(clase(no_clase,2));cell2mat(clase(no_clase,3))];
         Area = mean(temp(1,:));
         Circularidad = mean(temp(2,:));

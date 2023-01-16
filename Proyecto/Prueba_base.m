@@ -39,6 +39,7 @@ elseif (usuario == 2)
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
         for imag = 1:1:length(nombres)
             ver_imagenes(nombres(imag));
+            imag
             pausa = input("Cotinuar?  ");
         end
 elseif (usuario == 3)
