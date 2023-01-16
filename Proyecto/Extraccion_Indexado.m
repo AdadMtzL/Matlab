@@ -13,20 +13,20 @@ usuario = input("Indique quien esta haciendo uso del software en este monento \n
 if usuario ==1
     nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 elseif usuario ==2
-    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
-    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
+    nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
+    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
 %nombreInicialArchivo = "IMAG";
-nombreInicialArchivo = "IMG";
+nombreInicialArchivo = "IMAG";
 extension = ".bmp";
-totalImagenes = 25;
+totalImagenes = 40;
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 [clase,x,y,z] = crear_clases(info);
 index_info = inx(clase);
 %ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
-ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG039.bmp";
+ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG036.bmp";
 ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
@@ -60,7 +60,6 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
             contador = contador + 1;
         end
     end
-    contador
     
     %Guardamos cada caracteristica en un arreglo con nombre y numero de objeto
     objetosGuardados = 0;
@@ -75,7 +74,6 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
         imagen = imread(imagenes(i));
         imagen = imbinarize(imagen);
         imagen = bwareaopen(imagen,30);
-        i
         imagen = imfill(imagen,'holes');
         stats = regionprops(imagen,"Perimeter","Area","Centroid","Circularity","ConvexArea");
         for j =1 :1: length(stats)
@@ -147,7 +145,7 @@ function [clase,x,y,z] = crear_clases(info)
         repeticiones = repeticiones +1;
     end
     
-    x= clase_x;;
+    x= clase_x;
     y = clase_y;
     z= clase_z;
     cls = cell(5,3);
@@ -299,7 +297,7 @@ function Euclidean = ecd(clase,ruta_imagen)
             for i =1:1:length(stats)
                 ttmmp = stats_1(i).BoundingBox;
                 rectangle("Position",[ttmmp(1),ttmmp(2),ttmmp(3),ttmmp(4)],"EdgeColor","r","LineWidth",2);
-                text(stats(i).Centroid(1),stats(i).Centroid(2),strcat("Objeto ",num2str(i)," ",nombre_clase),"Color","g");
+                text(stats(i).Centroid(1),stats(i).Centroid(2),strcat(num2str(i)),"Color","g");
             end
         catch exception
             
