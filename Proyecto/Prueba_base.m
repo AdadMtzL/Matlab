@@ -6,7 +6,7 @@ warning off all %evita llamadas de atención
 usuario = input("Indique quien esta haciendo uso del software en este monento \n1.-Johan\n2.-Adad\n3.-Chema\n");
 
 if (usuario == 1)
-        nombre = "C:\Users\Johan\Documents\ImagenesPrueba\IMG";
+        nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".BMP";
         totalImagenes = 20;
