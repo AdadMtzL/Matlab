@@ -19,7 +19,7 @@ elseif usuario ==3
 end
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
-totalImagenes = 65  ;
+totalImagenes = 55  ;
 fprintf("Generacion no indexada \n");
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 fprintf("Creacion de clases \n");
@@ -28,12 +28,12 @@ fprintf("Generacion de la indexada \n");
 index_info = inx(clase);
 %ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
 %ecd(clase,ruta_imagen);
-texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG0";
-for ind = 26:1:65
-    ruta_imagen = strcat(texto,int2str(ind),".bmp");
-    ecd(clase,ruta_imagen);
-    pausa = input('Continuar  ');
-end
+%texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG0";
+%for ind = 26:1:65
+%    ruta_imagen = strcat(texto,int2str(ind),".bmp");
+%    ecd(clase,ruta_imagen);
+%    pausa = input('Continuar  ');
+%end
 
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
