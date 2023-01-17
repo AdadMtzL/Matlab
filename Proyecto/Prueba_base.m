@@ -34,7 +34,7 @@ elseif (usuario == 2)
         nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".bmp";
-        totalImagenes = 70;
+        totalImagenes = 65;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
         for imag = 61:1:length(nombres)
             ver_imagenes(nombres(imag));
