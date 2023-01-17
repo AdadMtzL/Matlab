@@ -31,13 +31,12 @@ if (usuario == 1)
         %    pausa = input("Cotinuar?  ");
         %end
 elseif (usuario == 2)
-        %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
         nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".bmp";
-        totalImagenes = 39;
+        totalImagenes = 55;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
-        for imag = 1:1:length(nombres)
+        for imag = 38:1:length(nombres)
             ver_imagenes(nombres(imag));
             imag
             pausa = input("Cotinuar?  ");
@@ -46,7 +45,7 @@ elseif (usuario == 3)
         nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\proyecto\base_2\bmp\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".bmp";
-        totalImagenes = 20;
+        totalImagenes = 55;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
         for imag = 1:1:length(nombres)
             ver_imagenes(nombres(imag));
