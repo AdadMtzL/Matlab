@@ -36,7 +36,7 @@ elseif (usuario == 2)
         extension = ".bmp";
         totalImagenes = 65;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
-        for imag = 61:1:length(nombres)
+        for imag = 1:1:length(nombres)
             ver_imagenes(nombres(imag));
             imag
             pausa = input("Cotinuar?  ");

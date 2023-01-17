@@ -17,19 +17,18 @@ elseif usuario ==2
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
-%nombreInicialArchivo = "IMAG";
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
-totalImagenes = 60;
+totalImagenes = 65  ;
 fprintf("Generacion no indexada \n");
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 fprintf("Creacion de clases \n");
 [clase,x,y,z] = crear_clases(info);
 fprintf("Generacion de la indexada \n");
 index_info = inx(clase);
-%ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
-%ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG036.bmp";
-%ecd(clase,ruta_imagen);
+ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
+%ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG065.bmp";
+ecd(clase,ruta_imagen);
 %A = [1,4,7,8;4,2,3,5];
 %mean(A,2)
 
@@ -152,7 +151,7 @@ function [clase,x,y,z] = crear_clases(info)
     y = clase_y;
     z= clase_z;
     cls = cell(5,3);
-    for ind = 1:1:4
+    for ind = 1:1:5
         conv_x = cell2mat(x{ind});
         conv_y = cell2mat(y{ind});
         conv_z = cell2mat(z{ind});
@@ -181,6 +180,7 @@ function Euclidean = ecd(clase,ruta_imagen)
     cls_pert = 0;
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
+    imagen = im2gray(imagen);
     imagen = imbinarize(imagen);
     imagen = bwareaopen(imagen,30);
     imagen = imfill(imagen,'holes');
