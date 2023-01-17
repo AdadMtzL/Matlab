@@ -13,7 +13,6 @@ usuario = input("Indique quien esta haciendo uso del software en este monento \n
 if usuario ==1
     nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 elseif usuario ==2
-    %nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG";
     nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
@@ -21,7 +20,7 @@ end
 %nombreInicialArchivo = "IMAG";
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
-totalImagenes = 25;
+totalImagenes = 60;
 fprintf("Generacion no indexada \n");
 info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
 fprintf("Creacion de clases \n");
@@ -126,7 +125,7 @@ function [clase,x,y,z] = crear_clases(info)
     contador_obj = 1;
     no_ind = 1;
     repeticiones = 1;
-    while repeticiones ~= 5
+    while repeticiones ~= 6
         for cont = contador_obj:1:contador_obj+14
             vx{no_ind} = info(cont,2);
             no_ind = no_ind+1;
