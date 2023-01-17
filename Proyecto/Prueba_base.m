@@ -9,7 +9,7 @@ if (usuario == 1)
         nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".BMP";
-        nombreFinal = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG031.bmp";
+        nombreFinal = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Imagenes\IMG066.bmp";
         imagen = imread(nombreFinal);
         imagen = im2gray(imagen);
         imagen = imbinarize(imagen);
