@@ -85,6 +85,7 @@ function imgs = ver_imagenes(ruta_imagen)
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
     imagen = im2gray(imagen);
+    imagen = imresize(imagen,[291,240]);
     imagen = imbinarize(imagen);
     imagen = bwareaopen(imagen,30);
     imagen = imfill(imagen,'holes');
