@@ -32,7 +32,7 @@ index_info = inx(clase);
 ruta_contenedora = [];
 rutas_validas =1;
 clase_buscada = opc();
-for ind = 1:1:25
+for ind = 1:1:55
     if ind < 10
         texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG00";
         ruta_imagen = strcat(texto,int2str(ind),".bmp");
@@ -241,11 +241,11 @@ function Euclidean = ecd(clase,ruta_imagen,clase_buscada,res)
             imagen = im2gray(imagen);
             imagen = imresize(imagen,[res,res]);
             imshow(imagen)
-            cls_pert
-            if cls_pert == clase_buscada
-                Euclidean = 1;
+            cls_pert(j)
+            if cls_pert(j) ==  clase_buscada
+               Euclidean =1;
             else
-                Euclidean = 0;
+               Euclidean =0;
             end
         catch exception
             

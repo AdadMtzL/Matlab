@@ -17,7 +17,9 @@ elseif usuario ==2
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
-res = 100;
+
+res = 1700;
+
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
 totalImagenes = 55  ;
@@ -27,8 +29,6 @@ fprintf("Creacion de clases \n");
 [clase,x,y,z] = crear_clases(info);
 fprintf("Generacion de la indexada \n");
 index_info = inx(clase);
-%ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
-%ecd(clase,ruta_imagen);
 ruta_contenedora = [];
 rutas_validas =1;
 clase_buscada = opc();
@@ -45,7 +45,6 @@ for ind = 1:1:25
        ruta_contenedora{rutas_validas} = ruta_imagen;
        rutas_validas = rutas_validas + 1;
     end
-    imshow(ruta_imagen)
     continuar = input('¿Siguiente imagen?  ');
 end
 for img =1:1:length(ruta_contenedora) 
@@ -209,6 +208,7 @@ end
 
 %----------Función para euclidiana----------------%
 function Euclidean = ecd(clase,ruta_imagen,clase_buscada,res)
+    cls_pert =[];
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
     imagen = im2gray(imagen);
@@ -235,14 +235,23 @@ function Euclidean = ecd(clase,ruta_imagen,clase_buscada,res)
         X_desc = stats(j).Area;
         Y_desc = stats(j).Circularity;
         Z_desc = stats(j).ConvexArea;
-        cls_pert = det_clase(clase,X_desc,Y_desc,Z_desc);
-        
+        cls_pert(j) = det_clase(clase,X_desc,Y_desc,Z_desc);
         try
-            if cls_pert == clase_buscada
-                Euclidean =1;
-            else
-                Euclidean = 0;
+            imagen = imread(ruta_imagen);
+            imagen = im2gray(imagen);
+            imagen = imresize(imagen,[res,res]);
+            imshow(imagen)
+            cls_pert
+            Elementos =0;
+            for c = 1:1:lenght(cls_pert)
+                if cls_pert(c) == clase_buscada
+                    Elementos = Elementos +1;
+                end
             end
+            if Elementos >0
+                Euclidean = 1;
+            else
+                E
         catch exception
             
         end
@@ -273,7 +282,7 @@ function cls_pert = det_clase(clase,X,Y,Z)
             end
         end
     end
-    cls
+    %cls
     cls_pert = cls;
 end
 
