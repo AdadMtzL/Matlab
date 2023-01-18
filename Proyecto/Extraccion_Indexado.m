@@ -18,7 +18,9 @@ elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
 
-res = 1000;
+res = 400;
+
+
 
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
@@ -29,6 +31,8 @@ fprintf("Creacion de clases \n");
 [clase,x,y,z] = crear_clases(info);
 fprintf("Generacion de la indexada \n");
 index_info = inx(clase);
+%texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\Balon.png";
+%ecd(clase,texto,1,res);
 ruta_contenedora = [];
 rutas_validas =1;
 clase_buscada = opc();
@@ -45,7 +49,6 @@ for ind = 1:1:55
        ruta_contenedora{rutas_validas} = ruta_imagen;
        rutas_validas = rutas_validas + 1;
     end
-    %continuar = input('¿Siguiente imagen?  ');
 end
 for img =1:1:length(ruta_contenedora) 
         imshow(ruta_contenedora{img});
