@@ -18,7 +18,7 @@ elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
 
-res = 1700;
+res = 1000;
 
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
@@ -45,7 +45,7 @@ for ind = 1:1:55
        ruta_contenedora{rutas_validas} = ruta_imagen;
        rutas_validas = rutas_validas + 1;
     end
-    continuar = input('¿Siguiente imagen?  ');
+    %continuar = input('¿Siguiente imagen?  ');
 end
 for img =1:1:length(ruta_contenedora) 
         imshow(ruta_contenedora{img});
@@ -241,7 +241,7 @@ function Euclidean = ecd(clase,ruta_imagen,clase_buscada,res)
             imagen = im2gray(imagen);
             imagen = imresize(imagen,[res,res]);
             imshow(imagen)
-            cls_pert(j)
+            %cls_pert(j)
             if cls_pert(j) ==  clase_buscada
                Euclidean =1;
             else
