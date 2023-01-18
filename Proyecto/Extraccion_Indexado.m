@@ -174,7 +174,7 @@ function [clase,x,y,z] = crear_clases(info)
         clase_y{rep_2}=vy;
         clase_z{rep_2}=vz;
         contador_obj = contador_obj+9;
-        repeticiones = repeticiones +1;
+        rep_2 = rep_2 +1;
     end
     x= clase_x;
     y = clase_y;
@@ -288,9 +288,7 @@ function Datos_indexados = inx(clase)
     Data_carac{1,2} = "Area";
     Data_carac{1,3} = "Circularidad";
     Data_carac{1,4} = "Area convexa";
-    nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato","Rondana y tornillo",
-        "Rondana y alcayata","Rondana y cola de pato", "Rondana y Armella","Tornillo y alcayata","Tornillo y armella","Tornillo y cola de pato",
-        "Alcayata y armella","Alcayata y cola de pato","Armella y cola de pato"];
+    nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato","Rondana y tornillo","Rondana y alcayata","Rondana y cola de pato", "Rondana y Armella","Tornillo y alcayata","Tornillo y armella","Tornillo y cola de pato","Alcayata y armella","Alcayata y cola de pato","Armella y cola de pato"];
     for no_clase = 1:1:15
         temp = [cell2mat(clase(no_clase,1));cell2mat(clase(no_clase,2));cell2mat(clase(no_clase,3))];
         Area = mean(temp(1,:));
