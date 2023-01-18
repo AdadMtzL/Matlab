@@ -17,31 +17,46 @@ elseif usuario ==2
 elseif usuario ==3
     %nombre = "C:\Users\Johan\Documents\GitHub\Matlab\Proyecto\Bases Sossa\IMAG";
 end
+res = 100;
 nombreInicialArchivo = "IMG";
 extension = ".bmp";
-totalImagenes = 65  ;
+totalImagenes = 55  ;
 fprintf("Generacion no indexada \n");
-info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre);
+info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre,res);
 fprintf("Creacion de clases \n");
 [clase,x,y,z] = crear_clases(info);
 fprintf("Generacion de la indexada \n");
 index_info = inx(clase);
 %ruta_imagen = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Bases Sossa\IMAG115.bmp";
 %ecd(clase,ruta_imagen);
-texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG0";
-for ind = 26:1:65
-    ruta_imagen = strcat(texto,int2str(ind),".bmp");
-    ecd(clase,ruta_imagen);
-    pausa = input('Continuar  ');
+ruta_contenedora = [];
+rutas_validas =1;
+clase_buscada = opc();
+for ind = 1:1:25
+    if ind < 10
+        texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG00";
+        ruta_imagen = strcat(texto,int2str(ind),".bmp");
+    else
+        texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG0";
+        ruta_imagen = strcat(texto,int2str(ind),".bmp");
+    end
+    val = ecd(clase,ruta_imagen,clase_buscada,res);
+    if val == 1
+       ruta_contenedora{rutas_validas} = ruta_imagen;
+       rutas_validas = rutas_validas + 1;
+    end
+    imshow(ruta_imagen)
+    continuar = input('¿Siguiente imagen?  ');
 end
-
-%A = [1,4,7,8;4,2,3,5];
-%mean(A,2)
+for img =1:1:length(ruta_contenedora) 
+        imshow(ruta_contenedora{img});
+        continuar = input('¿Siguiente imagen?  ');
+end
 
 
 %%Funciones--------------------------------------------------------------------%%
 %---------Funcuión para la extracción de la información-------%
-function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
+function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre,res)
     %Arreglo de caracteristicas
     numero = "";
     imagenes = [""];
@@ -80,7 +95,7 @@ function info = extract_car(nombreInicialArchivo,extension,totalImagenes,nombre)
         end
         imagen = imread(imagenes(i));
         imagen = im2gray(imagen);
-        imagen = imresize(imagen,[320,320]);
+        imagen = imresize(imagen,[res,res]);
         imagen = imbinarize(imagen);
         imagen = bwareaopen(imagen,30);
         imagen = imfill(imagen,'holes');
@@ -174,7 +189,7 @@ function [clase,x,y,z] = crear_clases(info)
         clase_y{rep_2}=vy;
         clase_z{rep_2}=vz;
         contador_obj = contador_obj+9;
-        repeticiones = repeticiones +1;
+        rep_2 = rep_2 +1;
     end
     x= clase_x;
     y = clase_y;
@@ -192,19 +207,16 @@ function [clase,x,y,z] = crear_clases(info)
     return
 end
 
-    
-
 %----------Función para euclidiana----------------%
-function Euclidean = ecd(clase,ruta_imagen)
-    cls_pert = 0;
+function Euclidean = ecd(clase,ruta_imagen,clase_buscada,res)
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
     imagen = im2gray(imagen);
-    imagen = imresize(imagen,[320,320]);
+    imagen = imresize(imagen,[res,res]);
     imagen = imbinarize(imagen);
     imagen = bwareaopen(imagen,30);
     imagen = imfill(imagen,'holes');
-    imshow(imagen);
+    %imshow(imagen);
     stats = regionprops(imagen,"Area","Centroid","Circularity","ConvexArea");
 
     datos = split(ruta_imagen,'\');
@@ -212,7 +224,6 @@ function Euclidean = ecd(clase,ruta_imagen)
     nombreInicialArchivo = nombre(1);
     extension = nombre(2);
     numero = "";
-    %length(stats)
     for j = 1:1:length(stats)
         nombre = "obj";
         objetosGuardados = objetosGuardados + 1;
@@ -224,50 +235,13 @@ function Euclidean = ecd(clase,ruta_imagen)
         X_desc = stats(j).Area;
         Y_desc = stats(j).Circularity;
         Z_desc = stats(j).ConvexArea;
-        for ind = 1:1:5
-            temp = [cell2mat(clase(ind,1));cell2mat(clase(ind,2));cell2mat(clase(ind,3))];
-            mean_x = mean(temp(1,:));
-            mean_y = mean(temp(2,:));
-            mean_z = mean(temp(3,:));
-            Difx=mean_x - X_desc;
-            Dify=mean_y - Y_desc;
-            Difz=mean_z - Z_desc;
-            pdifx=Difx*Difx;
-            pdify=Dify*Dify;
-            pdifz=Difz*Difz;
-            dist_calc = sqrt(pdifx+pdify+pdifz);
-            if (ind ==1)
-                dist_min = dist_calc;
-                cls_pert = ind;
-            else
-                if(dist_calc<dist_min)
-                    dist_min=dist_calc;
-                    cls_pert = ind;
-                end
-            end
-        end
-        if cls_pert == 1
-            nombre_clase = "Rondana";
-        elseif cls_pert == 2
-            nombre_clase = "Tornilllo";
-        elseif cls_pert == 3
-            nombre_clase = "Alcayata";
-        elseif cls_pert == 4
-            nombre_clase = "Armella";
-        elseif cls_pert == 5
-            nombre_clase = "Cola de pato";
-        end
+        cls_pert = det_clase(clase,X_desc,Y_desc,Z_desc);
+        
         try
-            fprintf("El objeto "+nombreObjeto(j,1));
-            fprintf(" tiene una distancia de "+dist_calc);
-            texto = strcat(" y pertenece a la clase ",nombre_clase);
-            fprintf(texto);
-            fprintf("\n");
-            stats_1 = regionprops(imagen,"Perimeter","Area","Centroid","BoundingBox","Circularity",'Extrema',"ConvexArea");
-            for i =1:1:length(stats)
-                ttmmp = stats_1(i).BoundingBox;
-                rectangle("Position",[ttmmp(1),ttmmp(2),ttmmp(3),ttmmp(4)],"EdgeColor","r","LineWidth",2);
-                text(stats(i).Centroid(1),stats(i).Centroid(2),strcat(num2str(i)),"Color","g");
+            if cls_pert == clase_buscada
+                Euclidean =1;
+            else
+                Euclidean = 0;
             end
         catch exception
             
@@ -275,8 +249,35 @@ function Euclidean = ecd(clase,ruta_imagen)
     end
 end
 
+%Funcion de apoyo
+function cls_pert = det_clase(clase,X,Y,Z)
+    for ind =1:1:15
+        temp = [cell2mat(clase(ind,1));cell2mat(clase(ind,2));cell2mat(clase(ind,3))];
+        mean_x = mean(temp(1,:));
+        mean_y = mean(temp(2,:));
+        mean_z = mean(temp(3,:));
+        Difx=mean_x - X;
+        Dify=mean_y - Y;
+        Difz=mean_z - Z;
+        pdifx=Difx*Difx;
+        pdify=Dify*Dify;
+        pdifz=Difz*Difz;
+        dist_calc = sqrt(pdifx+pdify+pdifz);
+        if ind ==1
+            dist_min = dist_calc;
+            cls = ind;
+        else
+            if (dist_calc<dist_min)
+                dist_min=dist_calc;
+                cls = ind;
+            end
+        end
+    end
+    cls
+    cls_pert = cls;
+end
 
-%---------Función para obtener la base indexada cambiar a 5 en le for---%
+%---------Función para obtener la base indexada cambiar---%
 function Datos_indexados = inx(clase)
     try 
         delete("tablaIndexada.xlsx");
@@ -288,10 +289,8 @@ function Datos_indexados = inx(clase)
     Data_carac{1,2} = "Area";
     Data_carac{1,3} = "Circularidad";
     Data_carac{1,4} = "Area convexa";
-    nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato","Rondana y tornillo",
-        "Rondana y alcayata","Rondana y cola de pato", "Rondana y Armella","Tornillo y alcayata","Tornillo y armella","Tornillo y cola de pato",
-        "Alcayata y armella","Alcayata y cola de pato","Armella y cola de pato"];
-    for no_clase = 1:1:5
+    nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato","Rondana y tornillo","Rondana y alcayata","Rondana y cola de pato", "Rondana y Armella","Tornillo y alcayata","Tornillo y armella","Tornillo y cola de pato","Alcayata y armella","Alcayata y cola de pato","Armella y cola de pato"];
+    for no_clase = 1:1:15
         temp = [cell2mat(clase(no_clase,1));cell2mat(clase(no_clase,2));cell2mat(clase(no_clase,3))];
         Area = mean(temp(1,:));
         Circularidad = mean(temp(2,:));
@@ -310,4 +309,14 @@ function Datos_indexados = inx(clase)
     %Esta escribiendo Data_Carac_1,Data_Carac_2,Data_Carac_3,Data_Carac_4
     %no se como corregirlo
     writetable(Datos_indexados_tabla,'tablaIndexada.xlsx',"AutoFitWidth",true);
+end
+
+function menu =opc()
+    nombre = ["Rondana","Tornillo","Alcayata","Armella","Cola de pato","Rondana y tornillo","Rondana y alcayata","Rondana y cola de pato", "Rondana y Armella","Tornillo y alcayata","Tornillo y armella","Tornillo y cola de pato","Alcayata y armella","Alcayata y cola de pato","Armella y cola de pato"];
+    fprintf("Indique la clase para buscar imagenes \n");
+    for nombre_clase =1:1:length(nombre)
+        texto = strcat(int2str(nombre_clase),".- ",nombre(nombre_clase));
+        fprintf(texto+"\n");
+    end
+    menu = input('Que clase desea buscar   ');
 end

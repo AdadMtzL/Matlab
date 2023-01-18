@@ -34,9 +34,9 @@ elseif (usuario == 2)
         nombre = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG";
         nombreInicialArchivo = "IMG";
         extension = ".bmp";
-        totalImagenes = 9;
+        totalImagenes = 55;
         nombres = gtr(nombreInicialArchivo,extension,totalImagenes,nombre);
-        for imag = 1:1:length(nombres)
+        for imag = 31:1:length(nombres)
             ver_imagenes(nombres(imag));
             imag
             pausa = input("Cotinuar?  ");
@@ -85,7 +85,7 @@ function imgs = ver_imagenes(ruta_imagen)
     objetosGuardados = 0;
     imagen = imread(ruta_imagen);
     imagen = im2gray(imagen);
-    imagen = imresize(imagen,[320,320]);
+    imagen = imresize(imagen,[1700,1700]);
     imagen = imbinarize(imagen);
     imagen = bwareaopen(imagen,30);
     imagen = imfill(imagen,'holes');
