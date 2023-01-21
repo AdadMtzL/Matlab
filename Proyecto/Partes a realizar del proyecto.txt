@@ -1,5 +1,0 @@
-Partes del proyecto
-1.- Hacer la separación de objetos °°
-2.- Encontrar las características de cada objeto °°
-3.- Guardar las características en una base de datos (opcional)
-4.- Hacer pruebas de reconocimiento de objetos
