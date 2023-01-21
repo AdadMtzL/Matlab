@@ -4,13 +4,13 @@ close all
 
 %Código principal
 %ruta1 = "C:/Users/Johan/Desktop/Parte1.png";
-%ruta2 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/belgica.jpeg";              
-%ruta3 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/colombia.png";                
-%ruta4 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Holanda.jpeg";                
-%ruta5 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Italia.jpeg";                
-%ruta6 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Irlanda.jpeg";          
-%ruta7 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/luxemburgo.jpeg";
-%ruta8 = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/qatar.png";
+%ruta2 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/belgica.jpeg";              
+%ruta3 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/colombia.png";                
+%ruta4 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Holanda.jpeg";                
+%ruta5 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Italia.jpeg";                
+%ruta6 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Irlanda.jpeg";          
+%ruta7 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/luxemburgo.jpeg";
+%ruta8 = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/qatar.png";
 
 Opciones();
 bandera = 1;
@@ -309,21 +309,21 @@ function [puntos,info] = Generar_puntos(cantidad,value)
 
 function ruta = ObtenerRuta(valor)
     if valor == 1
-    ruta = "C:/Users/Johan/Desktop/Parte1.png";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Alemania.jpeg";
     elseif valor == 2
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/belgica.jpeg";              
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/belgica.jpeg";              
     elseif valor == 3
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/colombia.png";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/colombia.png";
     elseif valor == 4
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Holanda.jpeg";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Holanda.jpeg";
     elseif valor == 5
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Italia.jpeg";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Italia.jpeg";
     elseif valor == 6
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/Irlanda.jpeg";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/Irlanda.jpeg";
     elseif valor == 7
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/luxemburgo.jpeg";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/luxemburgo.jpeg";
     elseif valor == 8        
-    ruta = "C:/Users/19286463/Desktop/Escom/semestre actual/pattern/github/Matlab/practicas/Práctica_8/imagenes/qatar.png";
+    ruta = "C:/Users/19286463/Desktop/Escom/pattern/github/Matlab/practicas/Práctica_8/imagenes/qatar.png";
     end
     return
 end
