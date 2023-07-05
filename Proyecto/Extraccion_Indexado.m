@@ -38,10 +38,10 @@ rutas_validas =1;
 clase_buscada = opc();
 for ind = 1:1:55
     if ind < 10
-        texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG00";
+        texto = "C:\Users\19286463\Desktop\Escom\pattern\github\Matlab\Proyecto\Imagenes\IMG00";
         ruta_imagen = strcat(texto,int2str(ind),".bmp");
     else
-        texto = "C:\Users\19286463\Desktop\Escom\semestre actual\pattern\github\Matlab\Proyecto\Imagenes\IMG0";
+        texto = "C:\Users\19286463\Desktop\Escom\pattern\github\Matlab\Proyecto\Imagenes\IMG0";
         ruta_imagen = strcat(texto,int2str(ind),".bmp");
     end
     val = ecd(clase,ruta_imagen,clase_buscada,res);
